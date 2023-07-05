@@ -64,11 +64,16 @@
                         </g>
                     </svg>
                     <div>
-                        <a href="javascript:a();">alert</a>
-                        <a href="javascript:b();">confirm</a>
-                        <a href="javascript:c();">askinfo</a>
-                        <a href="javascript:write();">write</a>
-                        <a href="javascript:Name();">name</a>
+
+                        <a href="javascript:wOpen('width=300, height=300, top=200, left=400');">new window</a>
+                        <a href="javascript:wClose();">close</a>
+                        <a href="javascript:wFill();">fill</a>
+                        <a href="javascript:foc();">focus</a>
+                        <a href="javascript:bl();">blur</a>
+                        <a href="javascript:width();">width height</a>
+{{--                        <a href="javascript:c();">askinfo</a>--}}
+{{--                        <a href="javascript:write();">write</a>--}}
+{{--                        <a href="javascript:Name();">name</a>--}}
 
                     </div>
                 </div>
@@ -194,51 +199,44 @@
                 </div>
             </div>
         </div>
-{{--    <script src="/app/schoolhbd/public/js/lab5.5.js"></script>--}}
+
     <script type="text/javascript">
-        document.write("<div>here an error</div>");
-        //function f(){
-        //var nav = '';
-        //навигатор выдай имя браузера
-        // for (var p in navigator)
-        // console.log(p, navigator[p].userAgent);
-
-        //экран выдай размер окна браузера
-        //     for (var p in screen)
-        //         console.log(p, screen[p]);
+        var w;
+        //opening new onglet
+        // function wOpen(p){
+        //     w = open("", "x", p);
+        //     //отправить на задний фон
+        //     w.blur();
+        //     //выбросить окно предупреждения с сообщением test()
+        //     alert(test());
         //}
-
-        //св-ва обьекта windows
-        // function dReload(){
-        //     location.reload(true);
-        // }
-        // function dAssign(){
-        //     location.assign("https://ya.ru");
-        // }
-        // function dReplace(){
-        //     location.replace("http://ya.ru");}
-        //
-        // function Name(){
-        //     document.title = 'Hbd';
-        //     document.bgColor = "green";
-        // }
-        // function write(){
-        //     document.write("<div>here an error</div>");
-        // }
-
-        //диалоговые окна
-        function a(){
-            window.alert("you are about to be redirected to another site");
+        //closing new onglet
+        function wClose(){
+            //if(w) w.close();
+            if (!w.closed) w.close();
         }
-        function b(){
-            window.confirm("you are about to change document");
-        }
-        function c(){
-            var reply = prompt("what is your age?", "26");
+        //focus window
+        function foc(){git
+            focus();
         }
 
-        //таймеры
+        //blur window
+        function bl(){
+            blur();
+        }
 
+        function test(){return "test it?";}
+
+        function wFill(){
+            open("<p>текст параграфа</p>", "","")
+        }
+        function wOpen(){
+            var width = (screen.availWidth - 300)/2;
+            var height = (screen.availHeight - 200)/2;
+            var p = "width=300, height=200, top ="+height+", left=" + width;
+        w = open("","name",p);
+        w.focus();
+        }
     </script>
 
     </body>
