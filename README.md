@@ -1,1 +1,0 @@
-school hbd db# schoolhbd
