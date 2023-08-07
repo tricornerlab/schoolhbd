@@ -10,7 +10,7 @@
 
             @foreach($teachers as $teacher)
                 <div class="carousel-item active" style="width: auto; height: 100px; margin: 0 auto;">
-                    <a class="product-link" href="{{url('teacher', $teacher['id'])}}" target="_blank">
+                    <a class="product-link" href="{{route('teachers.show', $teacher['id'])}}" target="_blank">
                         <img class="product-img w-auto h-[100px] mx-3 d-block" src="{{env('APP_URL' )}}/img/teachers/{{$teacher['id']}}.png">
                     </a>
                 </div>

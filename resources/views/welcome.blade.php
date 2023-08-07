@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@php $locale = app()->getLocale() @endphp
+<html lang="{{ str_replace('_', '-', $locale) }}">
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,7 +47,7 @@
     <nav class=" bg-blue-800 text-blue-400 h-[32px] font2 items-center flex ">
         <ul class="flex inline-flex items-center ">
             @foreach($topmenu as $aditem)
-            <a href=" {{ url($aditem->link)  }} "><li class="list-none  p-2">{{ ucfirst( $aditem->{'title_'.app()->getLocale()} ) }}   &nbsp; | </li>
+            <a href=" {{ url($aditem->link)  }} "><li class="list-none  p-2">{{ ucfirst( $aditem->{'title_'.$locale} ) }}   &nbsp; | </li>
             @endforeach
 
 {{--AUTH--}}
@@ -101,10 +103,10 @@
 
 
                 <div class="mx-2">
-                @foreach(config('app.available_locales') as $locale)
-                    <a href="{{request()->url() }}?language={{ $locale }}"
-                        class="@if ( app()->getLocale() == $locale ) border-b border-white border-b-2  @endif inline-flex items-center px-1">
-                        {{strtoupper($locale)}}
+                @foreach(config('app.available_locales') as $area)
+                    <a href="{{request()->url() }}?language={{ $area }}"
+                        class="@if ( app()->getLocale() == $area ) border-b border-white border-b-2  @endif inline-flex items-center px-1">
+                        {{strtoupper($area)}}
                     </a>
                 @endforeach
                 </div>
@@ -169,12 +171,12 @@
 
                         @foreach($midmenu as $menu)
                         <li><a class=" mx-3"  href="#" role ="btn" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {{ $menu->{'title_'.app()->getLocale()} }}<i class="fa fa-angle-down mx-1"></i>
+                                {{ $menu->{'title_'.$locale} }}<i class="fa fa-angle-down mx-1"></i>
                             </a>
 
 
                             <ul class="dropdown-menu mt-[11px] rounded-0" aria-labelledby="dropdownMenuLink">
-                                {!! $menu->{'link_'.app()->getLocale()} !!}
+                                {!! $menu->{'link_'.$locale} !!}
                             </ul>
                         </li>
                     @endforeach
@@ -189,69 +191,119 @@
 
 
 
-                <main  class="mt-8 mx-0 w-full ">
+                <  class="mt-8 mx-0 w-full ">
 
-                    @php $label = 'Paracha de la semaine' @endphp
+                    {{--      PARACHA--}}
+                    @if ($locale=='fr') @php $label = 'Paracha de la semaine' @endphp
+                    @else @php $label = "Week's Torah portion" @endphp
+                    @endif
                     <x-section :label="$label" />
+                    <div class="">
+                            <h3 class="m-auto py-3 text-center">{{ $paracha[0]->{'title_'.$locale}   }}</h3>
+                            <p class="font3 py-2 ">{{ $paracha[0]->{'content_'.$locale}   }}</p>
 
-                        <div class="flex flex-col mt-16 border mx-8">
-                            @foreach($services as $service )
-                                <p class="text-sm p-1"><a href="{{route('services.show', $service->id)}}">- {{ $service->{'title_'.app()->getLocale()} }}</a></p>
-                            @endforeach
-                        </div>
+                    </div>
                     </div>
 
 
-
+                    {{--    SERVICES                --}}
                     @php $label = 'Services proposed' @endphp
                     <x-section :label="$label" />
-                        <div class="flex inline-flex">
-                            @foreach($services as $service )
-
-                                <p class="text-sm">- {{$service['title']}}</p>
-                            @endforeach
-                        </div>
+                            <div class="flex flex-col mt-16  max-h-[120px] w-full flex-wrap">
+                                @foreach( $services as $service )
+                                    <p class="text-sm p-1 justify-between ">
+                                        <a href="{{route('services.show', $service->id)}}" class="flex inline-flex">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="text-green-400" class="bi bi-check-lg mx-2" viewBox="0 0 16 16">
+                                                <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+                                            </svg>
+                                            {!!   $service->{'title_'.$locale} !!}
+                                        </a>
+                                    </p>
+                                @endforeach
+                            </div>
                     </div>
 
-
+                    {{--        NEWS                --}}
                     @php $label = 'News' @endphp
                     <x-section :label="$label" />
-
                     </div>
 
+                    {{--      EVENTS--}}
                     @php $label = 'Events' @endphp
                     <x-section :label="$label" />
 
                     </div>
 
-                    @php $label = "Gallerie de photos"; @endphp
-                    <x-section :label="$label" />
 
+                    {{--    PHOTOS     --}}
+                    @php $label = "Gallerie de photos"; @endphp
+                        <x-section :label="$label" class=""/>
+                        @foreach($photos as $img)
+                            <a href="{{route('photos.show',$img->id )}}">
+                                <img src="{{env('APP_URL').$img->link}}" class="h-[100px]">
+                            </a>
+                        @endforeach
                     </div>
 
+
+                {{--          ABOUT          --}}
                     @php $label = "A propos de l'école" @endphp
                     <x-section :label="$label" />
 
+                        <p class="font3 py-5">{!!   $about[0]->{ 'content_'.$locale } !!}</p>
                     </div>
 
+
+                    {{--       PROGRAMME             --}}
                     @php $label = 'Programme' @endphp
                     <x-section :label="$label" />
+                        <p>Selectionnez le classe pour visualiser le programme pour l'année scolaire:</p>
+                        <div class="flex inline-flex text-center mx-auto mt-5">
+                            @foreach($classes as $id => $class)
+                                <a class=" p-2 text-green-600" href="{{ route('classes.show', $id) }}">{{ $class }}</a>
+                            @endforeach
+                        </div>
 
                     </div>
+
+
+                    {{--    ACTIVITIES                --}}
 
                     @php $label = 'Activites' @endphp
                     <x-section :label="$label" />
-
+                    <div class="flex inline-flex">
+                        @foreach($activities as $act)
+                            <a class="w-[200px] pb-5 text-center items-center mx-4" href="{{ route('activities.show', $act->id) }}">
+                                {{ $act->title_en }}
+                                <img src="{{ env('APP_URL').$act->img }}" class="h-[200px] p-1 m-auto">
+                                <p class="font3">{{ $act->content_en }}</p>
+                            </a>
+                        @endforeach
+                    </div>
                     </div>
 
-                    @php $label = "Demandes d-inscriptions et visites" @endphp
+            {{--                    INSCRIPTIONS--}}
+                    @php $label = "Demandes d'inscriptions et visites" @endphp
                     <x-section :label="$label" />
-
+                    <div class="mt-6 flex flex-col">
+                        <a href="{{ route('messages.create') }}">Reserver la visite</a>
+                        <a href="{{ route('messages.create') }}">Demande d'information</a>
+                        <a href="{{ route('candidates.create') }}">Fiche d'inscription en ligne</a>
                     </div>
+            </div>
 
+
+        {{--             PARENTS       --}}
                     @php $label = 'Parents' @endphp
                     <x-section :label="$label" />
-
+                        <DIV CLASS="flex flex-col flex-wrap h-[120px] mt-6">
+                        <a>Support de cours digital</a>
+                        <a>Activites extra-scolaires</a>
+                        <a>Repas</a>
+                        <a>Information sur les classes</a>
+                        <a>Programme</a>
+                        <a>Calendrier</a>
+                    </DIV>
                     </div>
 
                 </main>

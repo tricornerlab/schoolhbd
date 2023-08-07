@@ -14,6 +14,10 @@ use App\Models\Timetable;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App;
+use App\Models\Paracha;
+use App\Models\Photo;
+use App\Models\Classe;
+use App\Models\Activitie;
 
 class PagesController extends Controller
 {
@@ -24,12 +28,16 @@ class PagesController extends Controller
         $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
         $socials = Social::orderby('icon_order')->get()->toArray();
         $contact = Contact::where('id', 1)->get()->toArray();
-
         $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
         $news = Novita::latest()->take(5)->get()->toArray();
         $teachers = Teacher::orderBy('surname')->get()->toArray();
         $director = Employee::where('id', 1)->get()->toArray();
         $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $activities = Activitie::orderBy('created_at')->take(4)->get();
+        $classes = Classe::all()->pluck('title', 'id')->toArray();
         //echo '<pre>';
         //print_r($director);
         return view('layouts.default.main')->with([
@@ -43,8 +51,11 @@ class PagesController extends Controller
             'timetable' => $timetable,
             'director' => $director,
             'services' => $services,
-
-
+            'paracha' => $paracha,
+            'about' => $about,
+            'photos' => $photos,
+            'activities' => $activities,
+            'classes' => $classes,
         ]);
     }
 
@@ -59,6 +70,7 @@ class PagesController extends Controller
         $about = Page::find(1)->select(['content_en', 'content_fr'])->get();
         $director = Employee::where('id', 1)->get()->toArray();
         $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $classes = Classe::all()->pluck(['id', 'title'])->toArray();
         //print_r($about);
         return view('layouts.default.about')->with([
             'topmenu' => $topmenu,
@@ -69,6 +81,7 @@ class PagesController extends Controller
             'sidemenu' => $sidemenu,
             'director' => $director,
             'services' => $services,
+            'classes' => $classes,
 
         ]);
     }

@@ -24,8 +24,9 @@
     {{--MAIN SECTION CONTENT THAT WE INSERT INTO WELCOME.BLADE.PHP--}}
 
     <div class="w-[20%]  mr-5   text-[#2f506c] pb-3  ">
+{{--        ABOUT SECTION--}}
         <section class="bg-gray-50 mb-4 h-[200px] pt-3 items-center">
-            <a class="font3 text-[#2f506c] text-lg p-3 pl-0 pt-[12px] border-t-2 border-[#6091ba] ">
+            <a class="font3 text-[#2f506c] text-lg p-3 pl-0 pt-[12px] border-t-2 border-[#6091ba] " href="{{ url('about') }}">
                 &nbsp &nbsp About School &nbsp</a>
             <img src="/app/ganhbd/public/img/img1.jpeg" class="w-[150px] h-[120px] pl-[10%] pt-[10px]"/>
         </section>

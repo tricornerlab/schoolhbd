@@ -13,7 +13,7 @@
     </section>
 
     {{--                        MOODLE LOGIN--}}
-    <section class=" bg-gray-50 text-[#2f506c] p-3 pt-[14px] pl-0 mt-4  h-[250px]">
+    <section class=" bg-gray-50 text-[#2f506c] p-3 pt-[14px] pl-0 mt-4  min-h-[250px] max-h-fit">
 
         <a class="flex inline-flex items-center font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[0px] pl-1 " href="https://moodle.idistance.school">
             <div class="">Moodle Login</div>
@@ -24,11 +24,13 @@
         <form class="mx-4  mt-0  flex flex-col justify-end" action="{{url('/mlogin')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
-            <div class="alert alert-success w-[200px] h-[60px] p-2.5">
+
                 @if(session()->has('failed'))
-                    {{__('auth.failed')}}
+                    <div class="alert alert-success w-[200px] h-[60px] p-2.5 text-center text-small pt-1 ">
+                        {{__('auth.failed')}}
+                    </div>
                 @endif
-            </div>
+
             <x-input name="login"  />
             <x-input name="pwd" />
             {{--                                <x-login></x-login>--}}

@@ -77,7 +77,9 @@ Route::resource('/activities', 'ActivitiesController');
 Route::resource('/concours', 'ConcoursController');
 Route::resource('/fees', 'FeesController');
 Route::resource('/services', 'ServicesController');
-
+Route::resource('/events', 'EventsController');
+Route::resource('/photos', 'PhotosController');
+Route::resource('/classes', 'ClassesController');
 
 Route::fallback(function () {return '404';}
 );
