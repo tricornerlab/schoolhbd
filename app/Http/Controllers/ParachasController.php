@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Paracha;
 use Illuminate\Http\Request;
 
-class ParachaController extends Controller
+class ParachasController extends Controller
 {
     /**
      * Display a listing of the resource.

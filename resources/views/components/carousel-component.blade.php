@@ -2,7 +2,7 @@
 
 <section class=" font3 text-[#2f506c] text-lg mt-8 bg-gray-50 h-[230px]" >
     <p class="border-t-2 border-[#6091ba] pt-[15px] px-3 mt-4 pl-4 p-4 w-[200px]">
-        Our team</p>
+        {{ __('sections.team') }}</p>
 
     <div class="carousel slide "   data-ride="carousel" >
 

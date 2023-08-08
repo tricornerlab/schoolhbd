@@ -191,13 +191,11 @@
 
 
 
-                <  class="mt-8 mx-0 w-full ">
+
 
                     {{--      PARACHA--}}
-                    @if ($locale=='fr') @php $label = 'Paracha de la semaine' @endphp
-                    @else @php $label = "Week's Torah portion" @endphp
-                    @endif
-                    <x-section :label="$label" />
+                    @php $url = route('parachas.show', 1); $label = __('sections.paracha');   @endphp
+                    <x-section :label="$label" :url="$url" />
                     <div class="">
                             <h3 class="m-auto py-3 text-center">{{ $paracha[0]->{'title_'.$locale}   }}</h3>
                             <p class="font3 py-2 ">{{ $paracha[0]->{'content_'.$locale}   }}</p>
@@ -206,9 +204,9 @@
                     </div>
 
 
-                    {{--    SERVICES                --}}
-                    @php $label = 'Services proposed' @endphp
-                    <x-section :label="$label" />
+{{--                        SERVICES                --}}
+                    @php $label = __('sections.services'); $url = route('services.index'); @endphp
+                    <x-section :label="$label" :url="$url" />
                             <div class="flex flex-col mt-16  max-h-[120px] w-full flex-wrap">
                                 @foreach( $services as $service )
                                     <p class="text-sm p-1 justify-between ">
@@ -223,21 +221,35 @@
                             </div>
                     </div>
 
-                    {{--        NEWS                --}}
-                    @php $label = 'News' @endphp
-                    <x-section :label="$label" />
-                    </div>
-
-                    {{--      EVENTS--}}
-                    @php $label = 'Events' @endphp
-                    <x-section :label="$label" />
-
+{{--                            NEWS                --}}
+                    @php $label =  __('sections.announcements'); $url=route('novitas.index') @endphp
+                    <x-section :label="$label" :url="$url" />
+                        @foreach($news as $new)
+                             <a href="{{ route('novitas.show', $new->id) }}">{{ $new->{'title_'.$locale} }}</a>
+                        @endforeach
                     </div>
 
 
-                    {{--    PHOTOS     --}}
-                    @php $label = "Gallerie de photos"; @endphp
-                        <x-section :label="$label" class=""/>
+
+{{--                          EVENTS--}}
+                    @php $label = __('sections.events'); $url=route('events.index'); @endphp
+                    <x-section :label="$label" :url="$url" />
+                    <div class="flex inline-flex">
+                    @foreach($events as $event)
+
+                            <a href="{{ route('events.show', $event->id) }}" class="px-4">
+                                <p class="text-center">{{ $event->{'title_'.$locale} }}</p>
+                                <img src="{{ env('APP_URL').$event->img }}" class="h-[200px]">
+                            </a>
+
+                    @endforeach
+                    </div>
+                    </div>
+
+
+{{--                        PHOTOS     --}}
+                    @php $label = __('sections.photos'); $url = route('photos.index'); @endphp
+                        <x-section :label="$label" :url="$url" class=""/>
                         @foreach($photos as $img)
                             <a href="{{route('photos.show',$img->id )}}">
                                 <img src="{{env('APP_URL').$img->link}}" class="h-[100px]">
@@ -246,18 +258,18 @@
                     </div>
 
 
-                {{--          ABOUT          --}}
-                    @php $label = "A propos de l'école" @endphp
-                    <x-section :label="$label" />
+{{--                          ABOUT          --}}
+                    @php $label = __('sections.about'); $url=url('about') @endphp
+                    <x-section :label="$label" :url="$url" />
 
                         <p class="font3 py-5">{!!   $about[0]->{ 'content_'.$locale } !!}</p>
                     </div>
 
 
-                    {{--       PROGRAMME             --}}
-                    @php $label = 'Programme' @endphp
-                    <x-section :label="$label" />
-                        <p>Selectionnez le classe pour visualiser le programme pour l'année scolaire:</p>
+{{--                           PROGRAMME             --}}
+                    @php $label = __('sections.program'); $url=url('program'); @endphp
+                    <x-section :label="$label" :url="$url"/>
+                        <p> {{ __('sections.select') }}</p>
                         <div class="flex inline-flex text-center mx-auto mt-5">
                             @foreach($classes as $id => $class)
                                 <a class=" p-2 text-green-600" href="{{ route('classes.show', $id) }}">{{ $class }}</a>
@@ -267,10 +279,10 @@
                     </div>
 
 
-                    {{--    ACTIVITIES                --}}
+{{--                        ACTIVITIES                --}}
 
-                    @php $label = 'Activites' @endphp
-                    <x-section :label="$label" />
+                    @php $label = __('sections.activities'); $url=route('activities.index'); @endphp
+                    <x-section :label="$label" :url="$url" />
                     <div class="flex inline-flex">
                         @foreach($activities as $act)
                             <a class="w-[200px] pb-5 text-center items-center mx-4" href="{{ route('activities.show', $act->id) }}">
@@ -282,28 +294,29 @@
                     </div>
                     </div>
 
-            {{--                    INSCRIPTIONS--}}
-                    @php $label = "Demandes d'inscriptions et visites" @endphp
-                    <x-section :label="$label" />
+{{--                                INSCRIPTIONS--}}
+                    @php $label = __('sections.enquiries'); $url=''; @endphp
+                    <x-section :label="$label" :url="$url" />
                     <div class="mt-6 flex flex-col">
-                        <a href="{{ route('messages.create') }}">Reserver la visite</a>
-                        <a href="{{ route('messages.create') }}">Demande d'information</a>
-                        <a href="{{ route('candidates.create') }}">Fiche d'inscription en ligne</a>
+                        <a href="{{ route('messages.create') }}">{{ __('sections.reserve') }}</a>
+                        <a href="{{ route('messages.create') }}">{{ __('sections.information') }}</a>
+                        <a href="{{ route('candidates.create') }}">{{ __('sections.enroll') }}</a>
+                        <a href="">{{ __('sections.booklet') }}</a>
                     </div>
-            </div>
+                    </div>
 
 
-        {{--             PARENTS       --}}
-                    @php $label = 'Parents' @endphp
-                    <x-section :label="$label" />
-                        <DIV CLASS="flex flex-col flex-wrap h-[120px] mt-6">
-                        <a>Support de cours digital</a>
-                        <a>Activites extra-scolaires</a>
-                        <a>Repas</a>
-                        <a>Information sur les classes</a>
-                        <a>Programme</a>
-                        <a>Calendrier</a>
-                    </DIV>
+{{--                     PARENTS       --}}
+                    @php $label = __('sections.parents'); $url=url('toparents') @endphp
+                    <x-section :label="$label" :url="$url"   />
+                        <div CLASS="flex flex-col flex-wrap h-[120px] mt-6">
+                        <a href="{{ url('aboutm') }}">{{ __('sections.esupport') }}</a>
+                        <a href="{{ route('events.index') }}">{{ __('sections.extractivities') }}</a>
+                        <a href="{{ route('meals.index') }}">{{ __('sections.meals') }}</a>
+                        <a href="{{ url('program') }} ">{{ __('sections.infoclass') }}</a>
+                        <a href="{{ url('program') }}">{{ __('sections.program') }}</a>
+                        <a href="{{ url('calendar') }}">{{ __('sections.calendar') }}</a>
+                    </div>
                     </div>
 
                 </main>
@@ -313,9 +326,9 @@
 
 
 {{-- JAVA SCRIPT--}}
-<a href="javascript:click();" class="p-2 rounded">click and get the prize</a>
+{{--<a href="javascript:click();" class="p-2 rounded">click and get the prize</a>--}}
 
-<iframe src="{{url('/inner')}}" name="content" class="p-2 bg-red"></iframe>
+{{--<iframe src="{{url('/inner')}}" name="content" class="p-2 bg-red"></iframe>--}}
 {{--                        <a href="javascript:c();">askinfo</a>--}}
 {{--                        <a href="javascript:write();">write</a>--}}
 {{--                        <a href="javascript:Name();">name</a>--}}

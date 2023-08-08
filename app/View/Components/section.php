@@ -13,9 +13,11 @@ class section extends Component
      */
 
     public $label;
-    public function __construct($label)
+    public $url;
+    public function __construct($label, $url)
     {
         $this->label = $label;
+        $this->url = $url;
 
 
     }

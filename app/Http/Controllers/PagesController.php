@@ -18,6 +18,7 @@ use App\Models\Paracha;
 use App\Models\Photo;
 use App\Models\Classe;
 use App\Models\Activitie;
+use App\Models\Event;
 
 class PagesController extends Controller
 {
@@ -29,7 +30,7 @@ class PagesController extends Controller
         $socials = Social::orderby('icon_order')->get()->toArray();
         $contact = Contact::where('id', 1)->get()->toArray();
         $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(5)->get()->toArray();
+        $news = Novita::latest()->take(6)->get();
         $teachers = Teacher::orderBy('surname')->get()->toArray();
         $director = Employee::where('id', 1)->get()->toArray();
         $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
@@ -38,6 +39,7 @@ class PagesController extends Controller
         $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
         $activities = Activitie::orderBy('created_at')->take(4)->get();
         $classes = Classe::all()->pluck('title', 'id')->toArray();
+        $events = Event::latest()->take(2)->get();
         //echo '<pre>';
         //print_r($director);
         return view('layouts.default.main')->with([
@@ -56,6 +58,7 @@ class PagesController extends Controller
             'photos' => $photos,
             'activities' => $activities,
             'classes' => $classes,
+            'events' => $events,
         ]);
     }
 
@@ -246,6 +249,122 @@ class PagesController extends Controller
 
         ]);
     }
+
+    public function calendar(){
+        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
+        $socials = Social::orderby('icon_order')->get()->toArray();
+        $contact = Contact::where('id', 1)->get()->toArray();
+        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
+        $news = Novita::latest()->take(5)->get()->toArray();
+        $teachers = Teacher::orderBy('surname')->get()->toArray();
+        $director = Employee::where('id', 1)->get()->toArray();
+        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $activities = Activitie::orderBy('created_at')->take(4)->get();
+        $classes = Classe::all()->pluck('title', 'id')->toArray();
+        return view('layouts.default.calendar')->with([
+            'topmenu' => $topmenu,
+            'sidemenu' => $sidemenu,
+            'socials' => $socials,
+            'contact' => $contact,
+            'midmenu' => $midmenu,
+            'news' => $news,
+            'teachers' => $teachers,
+            'timetable' => $timetable,
+            'director' => $director,
+            'services' => $services,
+            'paracha' => $paracha,
+            'about' => $about,
+            'photos' => $photos,
+            'activities' => $activities,
+            'classes' => $classes,
+//            'program' => $program,
+        ]);
+    }
+
+    public function toParents(){
+        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
+        $socials = Social::orderby('icon_order')->get()->toArray();
+        $contact = Contact::where('id', 1)->get()->toArray();
+        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
+        $news = Novita::latest()->take(6)->get();
+        $teachers = Teacher::orderBy('surname')->get()->toArray();
+        $director = Employee::where('id', 1)->get()->toArray();
+        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $activities = Activitie::orderBy('created_at')->take(4)->get();
+        $classes = Classe::all()->pluck('title', 'id')->toArray();
+        $events = Event::latest()->take(2)->get();
+        //echo '<pre>';
+        //print_r($director);
+        return view('layouts.default.parents')->with([
+            'topmenu' => $topmenu,
+            'sidemenu' => $sidemenu,
+            'socials' => $socials,
+            'contact' => $contact,
+            'midmenu' => $midmenu,
+            'news' => $news,
+            'teachers' => $teachers,
+            'timetable' => $timetable,
+            'director' => $director,
+            'services' => $services,
+            'paracha' => $paracha,
+            'about' => $about,
+            'photos' => $photos,
+            'activities' => $activities,
+            'classes' => $classes,
+            'events' => $events,
+        ]);
+    }
+
+    public function aboutMoodle(){
+        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
+        $socials = Social::orderby('icon_order')->get()->toArray();
+        $contact = Contact::where('id', 1)->get()->toArray();
+        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
+        $news = Novita::latest()->take(6)->get();
+        $teachers = Teacher::orderBy('surname')->get()->toArray();
+        $director = Employee::where('id', 1)->get()->toArray();
+        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $activities = Activitie::orderBy('created_at')->take(4)->get();
+        $classes = Classe::all()->pluck('title', 'id')->toArray();
+        $events = Event::latest()->take(2)->get();
+        //echo '<pre>';
+        //print_r($director);
+        return view('layouts.default.aboutmoodle')->with([
+            'topmenu' => $topmenu,
+            'sidemenu' => $sidemenu,
+            'socials' => $socials,
+            'contact' => $contact,
+            'midmenu' => $midmenu,
+            'news' => $news,
+            'teachers' => $teachers,
+            'timetable' => $timetable,
+            'director' => $director,
+            'services' => $services,
+            'paracha' => $paracha,
+            'about' => $about,
+            'photos' => $photos,
+            'activities' => $activities,
+            'classes' => $classes,
+            'events' => $events,
+        ]);
+    }
+
+
 
 //    public function change(Request $request){
 //

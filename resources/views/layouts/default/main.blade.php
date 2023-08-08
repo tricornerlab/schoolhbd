@@ -27,33 +27,39 @@
 {{--        ABOUT SECTION--}}
         <section class="bg-gray-50 mb-4 h-[200px] pt-3 items-center">
             <a class="font3 text-[#2f506c] text-lg p-3 pl-0 pt-[12px] border-t-2 border-[#6091ba] " href="{{ url('about') }}">
-                &nbsp &nbsp About School &nbsp</a>
-            <img src="/app/ganhbd/public/img/img1.jpeg" class="w-[150px] h-[120px] pl-[10%] pt-[10px]"/>
+                {{ __('sections.about') }}
+            </a>
+            <img src="/app/ganhbd/public/img/img1.jpeg" class="w-[150px] h-[120px] pl-[10%] pt-[20px]"/>
         </section>
 
-
+{{--        TIMETABLE--}}
         <section class= "bg-gray-50  h-[400px] items-center flex flex-col">
             <a class="font3 text-[#2f506c] text-lg pt-4 pl-0   border-t-2 border-[#6091ba] align-items-lg-start">
-                &nbsp &nbsp Day timetable &nbsp
+                {{ __('sections.timetable') }}
             </a>
-
             <x-timetable :timetable="$timetable" class="items-center"></x-timetable>
-
             <a href="{{url('timetables')}}" class=" text-blue-400  ">
                 <div class="flex inline-flex  font3 items-center text-center py-2">
-                    <div class="">See full timetable</div>
+                    <div class="">{{ __('sections.see') }}</div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right text-blue-400" viewBox="0 0 16 16">
                         <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
                     </svg>
+                </div>
+            </a>
+        </section>
 
-                </div></a>
-
+        {{--  IMAGES--}}
+        <section class= "bg-gray-50  h-[250px] items-center flex flex-col mt-4">
+            <a class="font3 text-[#2f506c] text-lg pt-4 pl-0   border-t-2 border-[#6091ba] align-items-lg-start">
+                {{ __('sections.photos') }}
+            </a>
         </section>
         {{--WEATHER WIDGET--}}
-        <section class="bg-gray-50 my-3  mt-4 h-[200px] pt-3">
+        <section class="bg-gray-50  mt-4 h-[200px] pt-3">
             <a class="font3 text-[#2f506c] text-lg p-3 pl-0 pt-[12px] border-t-2 border-[#6091ba] ">
-                &nbsp &nbsp Weather &nbsp</a>
-            <div class="p-4 w-[200px]">
+                {{ __('sections.weather') }}
+            </a>
+            <div class="pt-3 px-2 w-[200px] m-auto">
                 <a href="https://yandex.it/weather/geneva?lat=446.203548&amp;lon=6.140003" target="_blank">
                     <img src="https://info.weather.yandex.net/163/2_white.ru.png?domain=it" border="0" alt="Weather">
                     <img width="1" height="1" src="https://clck.yandex.ru/click/dtype=stred/pid=7/cid=1227/*https://img.yandex.ru/i/pix.gif" alt="" border="0">
@@ -66,35 +72,45 @@
     {{--    second column      NEWS          --}}
 
 
-<div class="w-[60%] mr-5  bg-gray-50 text-[#2f506c] p-3 pt-0  pb-0 pt-[12px] pl-0">
-    <a href="{{url('novitas')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[15px] px-3">
-        Last news
+<div class="w-[60%] mr-5  bg-gray-50 text-[#2f506c] p-3 pt-0  pb-0 pt-[12px] pl-0 mb-0">
+    <a href="{{url('novitas')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[15px] px-3 h3">
+        News
     </a>
 
     @foreach($news as $new)
-        <section class="" >
+        <section class="mt-6" >
             {{--   news1     --}}
             <div class="border-b">
                 <div class="flex inline-flex">
-                    <img src="/app/public/img/" class="w-[30px] h-[30px] pl-3 mt-2">
-                    <div class="font3 text-[#7fa7cb] pl-4">{{$new['title']}}</div>
+                    <img src="{{env('APP_URL').$new->photo }}" class="w-[30px] h-[30px] pl-3 mt-2">
+                    <div class="font3 text-[#7fa7cb] pl-4">
+                        {{$new->{'title_'.app()->getLocale()} }}
+                    </div>
                 </div>
-                <p class="font4 pl-12">{{substr($new['content'], 0, 240)}} ...</p>
+                <p class="font4 pl-12">
+                    {{substr($new->{'content_'.app()->getLocale()}, 0, 240)}} ...
+                </p>
 
                 <div class="flex inline-flex font4 text-gray-600 py-4 w-full justify-between ">
                     <div class="flex inline-flex font4 text-gray-600  w-[70%] items-center">
                         <i class="fa fa-calendar fa-sm  p-3 pr-2 pl-12 text-[text-gray-500]"></i>
-                        <p class=" ">{{ substr($new['created_at'], 0, 10)}}</p>
+                        <p class=" ">
+                            {{ substr($new->created_at, 0, 10)}}
+                        </p>
                         <i class="fas fa-comments fa-sm  p-3 pr-1 pl-4 text-[text-gray-500]"></i>
-                        <p class="pr-4">{{$new['likes']}}</p>
+                        <p class="pr-4">
+                            {{$new->likes}}
+                        </p>
                         <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="ml-1 bi bi-eye-fill " viewBox="0 0 16 16">
                             <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                             <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
                         </svg>
-                        <p class="pl-1 ">{{$new['views']}}</p>
+                        <p class="pl-1 ">
+                            {{$new->views}}
+                        </p>
                     </div>
                     <a class=" w-[100px] text-blue-400 inline-flex items-center" href="{{url('novitas')}}">
-                        <div class=" ">Read more..</div>
+                        <div class=" ">{{ __('sections.read') }}..</div>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right text-blue-400" viewBox="0 0 16 16">
                             <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
                         </svg>

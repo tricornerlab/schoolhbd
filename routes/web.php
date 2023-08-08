@@ -58,7 +58,9 @@ Route::get('/history', 'PagesController@history')->name('history');
 Route::get('/eduplan', 'PagesController@history')->name('eduplan');
 Route::get('/extras', 'PagesController@history')->name('extras');
 Route::get('/projects', 'PagesController@history')->name('projects');
-
+Route::get('/calendar', 'PagesController@calendar')->name('calendar');
+Route::get('/toparents', 'PagesController@toParents')->name('toparents');
+Route::get('/aboutm', 'PagesController@aboutMoodle')->name('aboutm');
 
 Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
 
@@ -80,6 +82,10 @@ Route::resource('/services', 'ServicesController');
 Route::resource('/events', 'EventsController');
 Route::resource('/photos', 'PhotosController');
 Route::resource('/classes', 'ClassesController');
+Route::resource('/parachas', 'ParachasController');
+Route::resource('/parents', 'ParentsController');
+Route::resource('/meals', 'MealsController');
+
 
 Route::fallback(function () {return '404';}
 );
