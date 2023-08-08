@@ -40,6 +40,7 @@ class PagesController extends Controller
         $activities = Activitie::orderBy('created_at')->take(4)->get();
         $classes = Classe::all()->pluck('title', 'id')->toArray();
         $events = Event::latest()->take(2)->get();
+        $footer = Page::findMany([10, 11, 12, 15]);
         //echo '<pre>';
         //print_r($director);
         return view('layouts.default.main')->with([
@@ -59,6 +60,7 @@ class PagesController extends Controller
             'activities' => $activities,
             'classes' => $classes,
             'events' => $events,
+            'footer' => $footer,
         ]);
     }
 

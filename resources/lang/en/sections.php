@@ -39,5 +39,10 @@ return [
     'esupport' => 'Online studying resources',
     'extractivities' => 'Extra-school activities',
     'infoclass' => 'Information on lessons',
+    'materials' => 'Study materials',
+    'finance' => 'Financials',
+    'question' => 'Survey',
+    'contact' => 'Contacts',
+    'bank'  => 'Bank account'
 
 ];

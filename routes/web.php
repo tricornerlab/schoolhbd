@@ -85,6 +85,7 @@ Route::resource('/classes', 'ClassesController');
 Route::resource('/parachas', 'ParachasController');
 Route::resource('/parents', 'ParentsController');
 Route::resource('/meals', 'MealsController');
+Route::resource('/materials', 'MaterialsController');
 
 
 Route::fallback(function () {return '404';}

@@ -39,6 +39,11 @@ return [
     'esupport' => 'Support de cours digital',
     'extractivities' => 'Activites extra-scolaires',
     'infoclass' => 'Information sur les cours',
+    'materials' => 'Materiel scolaire',
+    'finance' => 'Finance',
+    'question' => 'Questionnaire',
+    'contact' => 'Nous contacter',
+    'bank'  => 'Banque',
 
 
 ];
