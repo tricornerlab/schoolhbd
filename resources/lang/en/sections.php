@@ -43,6 +43,8 @@ return [
     'finance' => 'Financials',
     'question' => 'Survey',
     'contact' => 'Contacts',
-    'bank'  => 'Bank account'
+    'bank'  => 'Bank account',
+    'banner1' => 'COME TO OPEN DAYS',
+    'banner2' => 'Discover our online resources on Moodle'
 
 ];

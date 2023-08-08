@@ -44,6 +44,8 @@ return [
     'question' => 'Questionnaire',
     'contact' => 'Nous contacter',
     'bank'  => 'Banque',
+    'banner1' => 'Venez pour les journées de postes ouvertes',
+    'banner2' => 'Decouvrez les resources en ligne Moodle'
 
 
 ];
