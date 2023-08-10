@@ -41,6 +41,7 @@ class Activitie extends Resource
     {
         return [
             ID::make()->sortable(),
+            Text::make('title_fr')->sortable(),
         ];
     }
 
