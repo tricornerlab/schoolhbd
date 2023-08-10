@@ -106,12 +106,12 @@ return [
         ],
 
         'null' => [
-            'driver' => 'monolog',
-            'handler' => NullHandler::class,
+            'driver' => 'null',
+            'handler' => 'null',
         ],
 
         'emergency' => [
-            'path' => storage_path('logs/laravel.log'),
+            'path' => storage_path(''),
         ],
     ],
 
