@@ -4,7 +4,7 @@
     'name' => 'ecole',
     'env' => 'local',
     'debug' => true,
-    'url' => 'http://localhost/app/schoolhbd/public',
+    'url' => 'https://ecoleom.ch',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'fr',
@@ -190,7 +190,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/framework/cache/data',
+        'path' => NULL,
       ),
       'memcached' => 
       array (
@@ -282,10 +282,10 @@
         'driver' => 'mysql',
         'url' => NULL,
         'host' => '127.0.0.1',
-        'port' => '3307',
-        'database' => 'schoolhbd1',
-        'username' => 'root',
-        'password' => '',
+        'port' => '3306',
+        'database' => 'u543827847_schoolhbd1',
+        'username' => 'u543827847_admin1',
+        'password' => 'Behave04',
         'unix_socket' => '',
         'charset' => 'utf8mb4',
         'collation' => 'utf8mb4_unicode_ci',
