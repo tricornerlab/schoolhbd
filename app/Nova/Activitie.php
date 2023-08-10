@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 
 class Activitie extends Resource
@@ -42,6 +43,7 @@ class Activitie extends Resource
         return [
             ID::make()->sortable(),
             Text::make('title_fr')->sortable(),
+            Text::make('created_at')->sortable
         ];
     }
 
