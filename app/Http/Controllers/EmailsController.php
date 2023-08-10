@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Models\Employee;
-use App\Models\Message;
+use App\Models\Email;
 use App\Models\Midmenu;
 use App\Models\Page;
 use App\Models\Service;
 use App\Models\Social;
 use Illuminate\Http\Request;
 
-class MessagesController extends Controller
+class EmailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,7 +20,7 @@ class MessagesController extends Controller
      */
     public function index()
     {
-        $messages = Message::select(['subject', 'created_at'])->latest()->take(10)->get();
+        $messages = Email::select(['subject', 'created_at'])->latest()->take(10)->get();
        // dd($messages);
         return view('layouts.admin.messages')->with([
             'messages' => $messages,
@@ -71,7 +71,7 @@ class MessagesController extends Controller
 //        $request->validate(['email'=>'min:7']);
 //        $request->validate(['content'=>'min:7']);
 
-        $message  = Message::create($request->all());
+        $message  = Email::create($request->all());
         //$message->save();
         //echo ('<pre>');
         //print_r($message);
@@ -81,10 +81,10 @@ class MessagesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Email  $message
      * @return \Illuminate\Http\Response
      */
-    public function show(Message $message)
+    public function show(Email $message)
     {
         //
     }
@@ -92,10 +92,10 @@ class MessagesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Email  $message
      * @return \Illuminate\Http\Response
      */
-    public function edit(Message $message)
+    public function edit(Email $message)
     {
         //
     }
@@ -104,10 +104,10 @@ class MessagesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Email  $message
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Message $message)
+    public function update(Request $request, Email $message)
     {
         //
     }
@@ -115,10 +115,10 @@ class MessagesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Email  $message
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Message $message)
+    public function destroy(Email $message)
     {
         //
     }

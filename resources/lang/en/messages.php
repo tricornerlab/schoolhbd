@@ -18,6 +18,6 @@ return [
     'updated' => 'the information is updated',
     'failed' => 'operation could not be completed for a moment',
     'enrolled' => "The student has been registered",
-    'sent' => "Message sent",
+    'sent' => "Email sent",
     'enquiry' => "enquiry sent",
 ];

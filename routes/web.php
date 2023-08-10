@@ -69,7 +69,7 @@ Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
 
 //Route::get('/moodle', 'PagesController@moodle')->name('moodle');
 Route::resource('/novitas', 'NovitasController');
-Route::resource('/messages', 'MessagesController');
+Route::resource('/emails', 'EmailsController');
 Route::resource('/candidates', 'CandidatesController');
 Route::resource('/students', 'StudentsController');
 Route::resource('/teachers', 'TeachersController');
