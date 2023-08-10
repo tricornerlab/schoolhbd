@@ -43,7 +43,7 @@ class Activitie extends Resource
         return [
             ID::make()->sortable(),
             Text::make('title_fr')->sortable(),
-            Text::make('created_at')->sortable
+            Text::make('created_at')->sortable(),
         ];
     }
 
