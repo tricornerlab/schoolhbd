@@ -106,8 +106,8 @@ return [
         ],
 
         'null' => [
-            'driver' => 'null',
-            'handler' => 'null',
+            'driver' => '',
+            'handler' => '',
         ],
 
         'emergency' => [
