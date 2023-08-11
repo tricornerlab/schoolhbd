@@ -361,13 +361,13 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/app',
+        'root' => '/storage/app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/app/public',
-        'url' => 'http://localhost/app/schoolhbd/public/storage',
+        'root' => '/storage/app/public',
+        'url' => 'http://ecoleom.ch/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -384,7 +384,7 @@
     ),
     'links' => 
     array (
-      '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/public/storage' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/app/public',
+      '/storage' => '/storage/app/public',
     ),
   ),
   'hashing' => 
@@ -403,7 +403,7 @@
   ),
   'logging' => 
   array (
-    'default' => 'stack',
+    'default' => 'null',
     'deprecations' => NULL,
     'channels' => 
     array (
@@ -471,12 +471,12 @@
       ),
       'null' => 
       array (
-        'driver' => 'monolog',
-        'handler' => 'Monolog\\Handler\\NullHandler',
+        'driver' => '',
+        'handler' => '',
       ),
       'emergency' => 
       array (
-        'path' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/logs/laravel.log',
+        'path' => '',
       ),
     ),
   ),
