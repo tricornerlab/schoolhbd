@@ -47,7 +47,10 @@
     <nav class=" bg-blue-800 text-blue-400 h-[32px] font2 items-center flex ">
         <ul class="flex inline-flex items-center ">
             @foreach($topmenu as $aditem)
-            <a href=" {{ url($aditem->link)  }} "><li class="list-none  p-2">{{ ucfirst( $aditem->{'title_'.$locale} ) }}   &nbsp; | </li>
+            <a href=" {{ url($aditem->link)  }} ">
+                <li class="list-none  p-2">{{ ucfirst( $aditem->{'title_'.$locale} ) }}   &nbsp; 
+                </li>| 
+            </a>    
             @endforeach
 
 {{--AUTH--}}
