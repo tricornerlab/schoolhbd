@@ -45,7 +45,8 @@ return [
     'contact' => 'Nous contacter',
     'bank'  => 'Banque',
     'banner1' => 'Venez pour les journées de postes ouvertes',
-    'banner2' => 'Decouvrez les resources en ligne Moodle'
+    'banner2' => 'Decouvrez les resources en ligne Moodle',
+    'school'=> 'Ecole',
 
 
 ];
