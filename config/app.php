@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Ecole Ohalei Menahem'),
+    'name' => env('APP_NAME', 'Ecole'),
 
     /*
     |--------------------------------------------------------------------------
