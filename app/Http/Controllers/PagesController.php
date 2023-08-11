@@ -72,21 +72,39 @@ class PagesController extends Controller
         $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
         $socials = Social::orderby('icon_order')->get()->toArray();
         $contact = Contact::where('id', 1)->get()->toArray();
-        $about = Page::find(1)->select(['content_en', 'content_fr'])->get();
+        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
+        $news = Novita::latest()->take(6)->get();
+        $teachers = Teacher::orderBy('surname')->get()->toArray();
         $director = Employee::where('id', 1)->get()->toArray();
         $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $classes = Classe::all()->pluck(['id', 'title'])->toArray();
-        //print_r($about);
+        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $activities = Activitie::orderBy('created_at')->take(4)->get();
+        $classes = Classe::all()->pluck('title', 'id')->toArray();
+        $events = Event::latest()->take(4)->get();
+        $footer = Page::findMany([10, 11, 12, 15]);
+         $about = Page::find(1)->select(['content_en', 'content_fr'])->get();
+        
+
         return view('layouts.default.about')->with([
-            'topmenu' => $topmenu,
+ 'topmenu' => $topmenu,
+            'sidemenu' => $sidemenu,
             'socials' => $socials,
             'contact' => $contact,
             'midmenu' => $midmenu,
-            'about' => $about,
-            'sidemenu' => $sidemenu,
+            'news' => $news,
+            'teachers' => $teachers,
+            'timetable' => $timetable,
             'director' => $director,
             'services' => $services,
+            'paracha' => $paracha,
+            'about' => $about,
+            'photos' => $photos,
+            'activities' => $activities,
             'classes' => $classes,
+            'events' => $events,
+            'footer' => $footer,
 
         ]);
     }
