@@ -3,7 +3,7 @@
   array (
     'name' => 'ecole',
     'env' => 'local',
-    'debug' => true,
+    'debug' => false,
     'url' => 'https://ecoleom.ch',
     'asset_url' => NULL,
     'timezone' => 'UTC',
