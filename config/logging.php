@@ -111,7 +111,7 @@ return [
         ],
 
         'emergency' => [
-            'path' => storage_path(''),
+            'path' => '/home/u543827847/domains/tricorner.eu/lara/storage/logs/laravel.log',
         ],
     ],
 
