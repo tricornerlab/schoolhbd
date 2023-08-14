@@ -3,8 +3,8 @@
   array (
     'name' => 'ecole',
     'env' => 'local',
-    'debug' => false,
-    'url' => 'https://ecoleom.ch',
+    'debug' => true,
+    'url' => 'https://tricorner.eu',
     'asset_url' => NULL,
     'timezone' => 'UTC',
     'locale' => 'fr',
@@ -367,7 +367,7 @@
       array (
         'driver' => 'local',
         'root' => '/storage/app/public',
-        'url' => 'http://ecoleom.ch/storage',
+        'url' => 'http://tricorner.eu/storage',
         'visibility' => 'public',
       ),
       's3' => 
@@ -419,13 +419,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/logs/laravel.log',
+        'path' => '/home/u543827847/ecoleom.ch/public_html/storage/logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/logs/laravel.log',
+        'path' => '/home/u543827847/ecoleom.ch/public_html/storage/logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -681,7 +681,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/framework/sessions',
+    'files' => '/home/u543827847/ecoleom.ch/public_html/storage/framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -701,9 +701,9 @@
   array (
     'paths' => 
     array (
-      0 => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/resources/views',
+      0 => '/home/u543827847/tricorner.eu/lara/resources/views',
     ),
-    'compiled' => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/storage/framework/views',
+    'compiled' => '/home/u543827847/tricorner.eu/public_html/storage/framework/views',
   ),
   'flare' => 
   array (
@@ -757,7 +757,7 @@
       'ensure_pages_exist' => true,
       'page_paths' => 
       array (
-        0 => '/Applications/XAMPP/xamppfiles/htdocs/app/schoolhbd/resources/js/Pages',
+        0 => '/home/u543827847/tricorner.eu/lara/resources/js/Pages',
       ),
       'page_extensions' => 
       array (
