@@ -122,41 +122,30 @@ class NovitasController extends Controller
      */
     public function show(Novita $novita)
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
         $item = Novita::find($novita->id)->get();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
-        $news = DB::table('novitas')->paginate(2);
-        //echo '<pre>';
-        //print_r($director);
+
+
+
         return view('layouts.default.new')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
             'item' => $item,
+            'news' => $this->news,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
         ]);
     }
 

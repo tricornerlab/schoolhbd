@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'calendar' => 'Calendier',
+    'calendar' => 'Calendrier',
     'class' => 'Classe',
     'paracha' => "Paracha de la semaine" ,
     'services' => 'Services proposés',

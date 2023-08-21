@@ -44,14 +44,14 @@
 
 
                 @php $button = __('messages.login'); @endphp
-            <x-green-button value="{{ __('messages.login') }}" class="text-sm mb-4" />
+            <x-submit value="{{ __('messages.login') }}" class="text-sm mb-4" />
         </form>
 
     </section>
 
     {{--   CALENDAR --}}
     <section class=" bg-gray-50 text-[#2f506c] p-3 pt-[13px] pl-0 mt-4 h-[300px]">
-        <a class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[15px] px-3 " href="{{ url('calendar') }}">Calendar</a>
+        <a class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[15px] px-3 " href="{{ url('calendar') }}">{{ __('sections.calendar') }}</a>
     </section>
 
     {{--                        DIRECTORS DETAILS--}}
