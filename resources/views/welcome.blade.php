@@ -228,8 +228,8 @@
                         <div class="flex inline-flex">
                         @foreach($news as $new)
 
-                             <a href="{{ route('novitas.show', $new->id) }}" class="w-[200px] h-[200px] rounded bg-white shadow p-4 m-auto  ">
-                                 <div class=" text-center border h-full ">{{ $new->{'title_'.$locale} }}</div>
+                             <a href="{{ route('novitas.show', $new->id) }}" class="w-[200px] h-[200px] rounded bg-yellow-100 shadow p-2 m-auto  ">
+                                 <div class=" text-center border h-full py-[10%]">{{ $new->{'title_'.$locale} }}</div>
                              </a>
                         @endforeach
                         </div>
@@ -245,7 +245,9 @@
 
                             <a href="{{ route('events.show', $event->id) }}" class="px-4">
                                 <p class="text-center">{{ $event->{'title_'.$locale} }}</p>
-                                <img src="{{ env('APP_URL').$event->img }}" class="h-[200px] mx-auto mt-3 frame">
+                                @if( env('APP_URL').$event->img )
+                                    <img src="{{ env('APP_URL').$event->img }}" class="h-[200px] mx-auto mt-3 frame items-center">
+                                @endif
                             </a>
 
                     @endforeach
@@ -293,7 +295,11 @@
                         @foreach($activities as $act)
                             <a class="w-[200px] pb-5 text-center items-center mx-4 " href="{{ route('activities.show', $act->id) }}">
                                 {{ $act->title_en }}
-                                <img src="{{ env('APP_URL').$act->img }}" class="h-[200px] p-1 m-auto frame">
+                                <div class="my-3">
+                                @if( env('APP_URL').$act->img )
+                                    <img src="{{ env('APP_URL').$act->img }}" class="h-[200px]  m-auto frame items-center ">
+                                @endif
+                                </div>
                                 <p class="font3">{{ $act->content_en }}</p>
                             </a>
                         @endforeach

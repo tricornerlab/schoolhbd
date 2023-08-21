@@ -17,6 +17,7 @@ use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
+use DB;
 use Illuminate\Http\Request;
 
 class MaterialsController extends Controller
@@ -70,9 +71,9 @@ class MaterialsController extends Controller
      */
     public function index()
     {
-        $item= Novita::where('title_fr', 'like', 'fournitures'  )->get();
+        $item = DB::table('novitas')->where('title_fr', 'like', 'Fournitures%'  )->paginate(2);
 
-        return view('layouts.default.new')->with([
+        return view('layouts.default.materials')->with([
             'item' => $item,
 
             'topmenu' => $this->topmenu,

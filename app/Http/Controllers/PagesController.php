@@ -409,6 +409,32 @@ class PagesController extends Controller
         ]);
     }
 
+    public function eduplan()
+    {
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.eduplan')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+    }
+
 
 
 }

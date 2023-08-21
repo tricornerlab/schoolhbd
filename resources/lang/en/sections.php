@@ -51,6 +51,7 @@ return [
     'soon' => 'This section will be added soon.',
     'parentmessage' =>'Some usefull services',
     'dashboard' => 'Dashboard',
-    'comittee' => 'Committee'
+    'comittee' => 'Committee',
+    'supplies' => 'School supplies'
 
 ];

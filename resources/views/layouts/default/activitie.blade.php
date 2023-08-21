@@ -1,7 +1,7 @@
 @extends('welcome')
 
 @section('content')
-@php $link = url('activities'); $title = ucfirst($text[0]->{'title_'.app()->getLocale()});@endphp
+@php $link = url('activities'); $title = __('sections.activities');@endphp
 <x-header :link="$link" :title="$title" />
 
 {{--    <section class="mx-auto w-[70%] mt-8 ">--}}
@@ -13,32 +13,34 @@
 {{--                    {{  }}--}}
 {{--                </a>--}}
 
-                @foreach($activities as $new)
+
 
                     {{--   news1     --}}
                     <div class="py-4">
                         <div class="flex flex-col items-center">
-{{--                            title--}}
+
                             <div class="font3 text-xl text-[#7fa7cb] pl-4">
-                                <a href="{{ route('activities.show', $new->id) }}">{{ $new->{'title_'.app()->getLocale()} }}</a>
+                                {{ $item[0]->{'title_'.app()->getLocale()} }}
                             </div>
-                            @if(env('APP_URL').$new->img)
-                                <img src="{{ env('APP_URL').$new->img }}" class="w-[400px] h-auto  m-4">
+                            @if(env('APP_URL').$item[0]->img)
+                                <img src="{{ env('APP_URL').$item[0]->img }}" class="w-[400px] h-auto  m-4">
                             @endif
                         </div>
                         <p class="font3 pl-12 text-gray-800">
-                            {{ $new->{'content_'.app()->getLocale()} }}
+                            {{ $item[0]->{'content_'.app()->getLocale()} }}
                         </p>
 
                         <div class="flex inline-flex font4 text-gray-600 py-4 w-full justify-between ">
                             <div class="flex inline-flex font4 text-gray-600  w-[70%] items-center">
                                 <i class="fa fa-calendar fa-lg   pr-2 pl-12 text-[text-gray-500]"></i>
-                                <p class=" ">{{ substr($new->created_at, 0, 10)}}</p>
+                                <p class=" ">{{ substr($item[0]->created_at, 0, 10)}}</p>
                                 <i class="fas fa-comments fa-lg  p-3 pr-1 pl-4 text-[text-gray-500]"></i>
 
                             </div>
                         </div>
                     </div>
+
+
 
 {{--                <a class=" w-[100px] text-blue-400 inline-flex items-center" href="">--}}
 {{--                    <div>Previous</div>  </a>--}}
@@ -52,8 +54,7 @@
 
 
 
-@endforeach
-                <p class="w-[300px] items-center">{{$activities->links()}}</p>
+
 
 
 

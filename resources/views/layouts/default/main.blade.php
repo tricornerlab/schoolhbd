@@ -4,7 +4,7 @@
     {{--    BANNER--}}
 
     <section class="max-w-6xl  m-auto px-auto   bg-white  position-static mt-2">
-        <img src="/app/ganhbd/public/img/slide-5.jpeg" class="w-[100%] h-auto pt-5 parent position-sticky">
+        <img src="{{ env('APP_URL') }}/img/slide-5.jpeg" class="w-[100%] h-auto pt-5 parent position-sticky">
         <div class="position-relative sopra0 font3 text-md">
             <p class=" h-[40px] w-fit bg-[#6091ba] text-white px-3 py-1.5  uppercase mb-1">
                 {{ __('sections.banner1') }}
@@ -37,7 +37,7 @@
 
 {{--        TIMETABLE--}}
         <section class= "bg-gray-50  h-[400px] items-center flex flex-col">
-            <a class="font3 text-[#2f506c] text-lg pt-4 pl-0   border-t-2 border-[#6091ba] align-items-lg-start">
+            <a class="font3 text-[#2f506c] text-lg pt-4 pl-0   border-t-2 border-[#6091ba] align-items-lg-start" href="{{ url('timetables') }}">
                 {{ __('sections.timetable') }}
             </a>
             <x-timetable :timetable="$timetable" class="items-center"></x-timetable>
@@ -97,7 +97,7 @@
                 <div class="flex inline-flex">
                     <img src="{{env('APP_URL').$new->photo }}" class="w-[30px] h-[30px] pl-3 mt-2">
                     <div class="font3 text-[#7fa7cb] pl-4">
-                        {{$new->{'title_'.app()->getLocale()} }}
+                        <a href="{{ route('novitas.show', $new->id) }}">{{$new->{'title_'.app()->getLocale()} }}</a>
                     </div>
                 </div>
                 <p class="font4 pl-12">

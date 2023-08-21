@@ -45,13 +45,14 @@ return [
     'question' => 'Questionnaire',
     'contact' => 'Nous contacter',
     'bank'  => 'Banque',
-    'banner1' => 'Venez pour les journées de postes ouvertes',
+    'banner1' => 'Venez pour les journées de portes ouvertes',
     'banner2' => 'Decouvrez les resources en ligne Moodle',
     'suppliers' => 'Fournisseurs',
     'soon' => 'Cet element va etre rajouté prochenement.',
     'parentmessage' =>'Quelques services utiles:',
     'dashboard' => 'Panel administratif',
-    'comittee' => 'Comité'
+    'comittee' => 'Comité',
+    'supplies' => 'Fournitures scolaires'
 
 
 ];

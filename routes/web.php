@@ -62,6 +62,7 @@ Route::get('/calendar', 'PagesController@calendar')->name('calendar');
 Route::get('/toparents', 'PagesController@toParents')->name('toparents');
 Route::get('/aboutm', 'PagesController@aboutMoodle')->name('aboutm');
 Route::get('/comitee', 'PagesController@comitee')->name('comitee');
+Route::get('/eduplan', 'PagesController@eduplan')->name('eduplan');
 
 Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
 

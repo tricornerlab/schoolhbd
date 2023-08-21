@@ -16,6 +16,7 @@ use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
+use DB;
 use Illuminate\Http\Request;
 
 class PhotosController extends Controller
@@ -69,9 +70,9 @@ class PhotosController extends Controller
      */
     public function index()
     {
-        $images = \DB::table('photos')->paginate(10);
+        $images = DB::table('photos')->paginate(10);
             //Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-
+    //dd($images);
         return view('layouts.default.gallery')->with([
             'images' => $images,
 
@@ -126,36 +127,27 @@ class PhotosController extends Controller
      */
     public function show(Photo $photo)
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
+        $images = Photo::where('id', $photo->id)->get();
+        return view('layouts.default.photo')->with([
+            'images' => $images,
 
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(5)->get()->toArray();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        //echo '<pre>';
-        //print_r($director);
-        return view('layouts.default.gallery')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
 
 
         ]);

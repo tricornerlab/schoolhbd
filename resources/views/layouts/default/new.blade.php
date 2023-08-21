@@ -4,12 +4,8 @@
 
 
 
-<section class="w-[80%]  m-auto px-auto   bg-white  position-static  inline-flex ">
-
-    <div class="w-full    text-[#2f506c]   pt-[12px] pl-0 mt-12">
-        <a href="{{url('novitas')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">
-            News
-        </a>
+    @php $title = "News"; $link = route('novitas.index') ;   @endphp
+    <x-header :title="$title" :link="$link" />
 
 
 
@@ -19,12 +15,14 @@
                             <div class="">
                                 <div class="flex flex-col items-center">
 
-                                    <div class="font3 text-xl text-[#7fa7cb] pl-4">
+                                    <div class="font3 text-xl text-[#7fa7cb] pl-4 pb-8">
                                         {{ $item[0]->{'title_'.app()->getLocale() } }}
                                     </div>
-                                    <img src="/app/ganhbd/public/img/{{$item[0]->photo}}" class="w-[400px] h-auto  m-4">
+                                    @if(  $item[0]->photo  )
+                                        <img src="{{ env('APP_URL') }}/img/{{$item[0]->photo}}" class="w-[400px] h-auto  m-4">
+                                    @endif
                                 </div>
-                                <p class="font3 pl-12 text-gray-800">{{ $item[0]->{'content_'.app()->getLocale()} }} ...</p>
+                                <p class="font3 pl-12 text-gray-800">{{ $item[0]->{'content_'.app()->getLocale()} }} </p>
 
                                 <div class="flex inline-flex font4 text-gray-600 py-4 w-full justify-between ">
                                     <div class="flex inline-flex font4 text-gray-600  w-[70%] items-center">
@@ -47,15 +45,16 @@
                                 </div>
                             </div>
 
-                        <p class="w-[300px] items-center">{{$news->links()}}</p>
+{{--                        <p class="w-[300px] items-center">{{$news->links()}}</p>--}}
                 </section>
+    </section>
     </div>
 
     {{--DIRECTORS--}}
-    <div class="mt-[120px]">
+    <div class="">
         <x-rightmenu :sidemenu="$sidemenu" :director="$director" class=""/>
     </div>
-</main>
-<main class="mx-auto w-[80%]">
+
+    <x-endtag/>
 @endsection
 

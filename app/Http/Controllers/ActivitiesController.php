@@ -147,11 +147,33 @@ class ActivitiesController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Activitie  $activitie
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(Activitie $activitie)
+    public function show(Activitie $activitie, $request)
     {
+        $item = Activitie::find($request)->get();
+        return view('layouts.default.activitie')->with([
+            'item' => $item,
 
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+            'activities' => $this->activities,
+        ]);
 
     }
 
