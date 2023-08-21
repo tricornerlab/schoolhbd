@@ -14,6 +14,7 @@ return [
     */
 
     'calendar' => 'Calendar',
+    'class' => 'Class',
     'paracha' => "Week's Torah portion" ,
     'services' => 'Services proposed',
     'events' => 'Events',
@@ -45,6 +46,11 @@ return [
     'contact' => 'Contacts',
     'bank'  => 'Bank account',
     'banner1' => 'COME TO OPEN DAYS',
-    'banner2' => 'Discover our online resources on Moodle'
+    'banner2' => 'Discover our online resources on Moodle',
+    'suppliers' => 'Suppliers',
+    'soon' => 'This section will be added soon.',
+    'parentmessage' =>'Some usefull services',
+    'dashboard' => 'Dashboard',
+    'comittee' => 'Committee'
 
 ];

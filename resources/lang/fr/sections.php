@@ -14,6 +14,7 @@ return [
     */
 
     'calendar' => 'Calendier',
+    'class' => 'Classe',
     'paracha' => "Paracha de la semaine" ,
     'services' => 'Services proposés',
     'events' => 'Evenements',
@@ -45,7 +46,12 @@ return [
     'contact' => 'Nous contacter',
     'bank'  => 'Banque',
     'banner1' => 'Venez pour les journées de postes ouvertes',
-    'banner2' => 'Decouvrez les resources en ligne Moodle'
+    'banner2' => 'Decouvrez les resources en ligne Moodle',
+    'suppliers' => 'Fournisseurs',
+    'soon' => 'Cet element va etre rajouté prochenement.',
+    'parentmessage' =>'Quelques services utiles:',
+    'dashboard' => 'Panel administratif',
+    'comittee' => 'Comité'
 
 
 ];

@@ -19,17 +19,23 @@
                             <div class="">
                                 <div class="flex flex-col items-center">
 
-                                    <div class="font3 text-xl text-[#7fa7cb] pl-4">{{$new->title}}</div>
-                                    <img src="/app/ganhbd/public/img/{{$new->photo}}" class="w-[400px] h-auto  m-4">
+                                    <div class="font3 text-xl text-[#7fa7cb] pl-4 pb-4">
+                                        {{ $new->{'title_'.app()->getLocale()} }}
+                                    </div>
+                                    @if ($new->photo)
+                                        <img src="{{ env('APP_URL').'/img/news/'.$new->photo }}" class="w-[400px] h-auto  m-4 pb-4">
+                                    @endif
                                 </div>
-                                <p class="font3 pl-12 text-gray-800">{{ $new->content }} ...</p>
+                                <p class="font3 pl-12 text-gray-800 py-4">
+                                    {{ $new->{'content_'.app()->getLocale()} }}
+                                </p>
 
                                 <div class="flex inline-flex font4 text-gray-600 py-4 w-full justify-between ">
                                     <div class="flex inline-flex font4 text-gray-600  w-[70%] items-center">
 {{--                                        DATE--}}
                                         <i class="fa fa-calendar fa-lg   pr-2 pl-12 text-[text-gray-500]"></i>
                                         <p class=" ">{{ substr($new->created_at, 0, 10)}}</p>
-                                        https://github.com/tamfelix/moodlehbd.git
+
 {{--                                        LIKES--}}
                                         <i class="fas fa-comments fa-lg  p-3 pr-1 pl-4 text-[#2f506c]"></i>
                                         <p class="pr-4">{{$new->likes}}</p>
@@ -45,12 +51,12 @@
                                 </div>
                             </div>
                       @endforeach
-                        <p class="w-[300px] items-center">{{$news->links()}}</p>
+                        <p class="w-[300px] items-center">{{ $news->links() }}</p>
                 </section>
     </div>
 
     {{--DIRECTORS--}}
-    <div class="mt-[120px]">
+    <div class="mt-[120px] w-[350px]">
         <x-rightmenu :sidemenu="$sidemenu" :director="$director" class=""/>
     </div>
 </main>

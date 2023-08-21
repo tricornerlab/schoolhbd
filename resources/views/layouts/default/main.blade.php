@@ -56,6 +56,16 @@
             <a class="font3 text-[#2f506c] text-lg pt-4 pl-0   border-t-2 border-[#6091ba] align-items-lg-start">
                 {{ __('sections.photos') }}
             </a>
+            <div>
+                @foreach($photos as $image)
+                    @if($image->iteration > 5)
+                    <a href="{{ route('photos.show', $image['id']) }}">
+                        <img src="{{ env('APP_URL').$image['link'] }}" class="h-[50px] border-white border-l-4">
+                    </a>
+                        @break
+                    @endif
+                @endforeach
+            </div>
         </section>
         {{--WEATHER WIDGET--}}
         <section class="bg-gray-50  mt-4 h-[200px] pt-3">

@@ -1,26 +1,30 @@
 @extends('welcome')
 
 @section('content')
+@php $link = url('activities'); $title = ucfirst($text[0]->{'title_'.app()->getLocale()});@endphp
+<x-header :link="$link" :title="$title" />
 
-    <section class="mx-auto w-[70%] mt-8 ">
+{{--    <section class="mx-auto w-[70%] mt-8 ">--}}
 
-        <main class="flex inline-flex w-full  mt-10 mr-0 pr-0">
+{{--        <main class="flex inline-flex w-full  mt-10 mr-0 pr-0">--}}
 
-            <div class="w-[100%]  mr-5  text-[#2f506c]  p-3  pt-[12px] pl-0">
-                <a href="{{url('activities')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">
-                    {{ $text[0]->{'title_'.app()->getLocale()} }}
-                </a>
+{{--            <div class="w-[100%]  mr-5  text-[#2f506c]  p-3  pt-[12px] pl-0">--}}
+{{--                <a href="{{}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">--}}
+{{--                    {{  }}--}}
+{{--                </a>--}}
 
                 @foreach($activities as $new)
-                <section class="m-8 bg-gray-50 p-5  mr-5">
+
                     {{--   news1     --}}
-                    <div class="">
+                    <div class="py-4">
                         <div class="flex flex-col items-center">
 
-                            <div class="font3 text-xl text-[#7fa7cb] pl-4">{{$new->title}}</div>
-                            <img src="/app/ganhbd/public/img/{{$new->img}}" class="w-[400px] h-auto  m-4">
+                            <div class="font3 text-xl text-[#7fa7cb] pl-4">{{ $new->{'title_'.app()->getLocale()} }}</div>
+                            <img src="{{ env('APP_URL').$new->img }}" class="w-[400px] h-auto  m-4">
                         </div>
-                        <p class="font3 pl-12 text-gray-800">{{ $new->content }} ...</p>
+                        <p class="font3 pl-12 text-gray-800">
+                            {{ $new->{'content_'.app()->getLocale()} }}
+                        </p>
 
                         <div class="flex inline-flex font4 text-gray-600 py-4 w-full justify-between ">
                             <div class="flex inline-flex font4 text-gray-600  w-[70%] items-center">
@@ -28,10 +32,9 @@
                                 <p class=" ">{{ substr($new->created_at, 0, 10)}}</p>
                                 <i class="fas fa-comments fa-lg  p-3 pr-1 pl-4 text-[text-gray-500]"></i>
 
-
-
+                            </div>
                         </div>
-
+                    </div>
 
 {{--                <a class=" w-[100px] text-blue-400 inline-flex items-center" href="">--}}
 {{--                    <div>Previous</div>  </a>--}}
@@ -44,22 +47,18 @@
 
 
 
-    </section>
 
 @endforeach
                 <p class="w-[300px] items-center">{{$activities->links()}}</p>
 
 
-            </div>
 
 
+             </div>
+             </section>
             <x-rightmenu :sidemenu="$sidemenu" :director="$director"  />
 
-        </main>
-    </section>
-
-</main>
-<main class="mx-auto w-[70%]">
+<x-endtag/>
 
 
 

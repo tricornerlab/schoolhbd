@@ -61,6 +61,7 @@ Route::get('/projects', 'PagesController@history')->name('projects');
 Route::get('/calendar', 'PagesController@calendar')->name('calendar');
 Route::get('/toparents', 'PagesController@toParents')->name('toparents');
 Route::get('/aboutm', 'PagesController@aboutMoodle')->name('aboutm');
+Route::get('/comitee', 'PagesController@comitee')->name('comitee');
 
 Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
 
@@ -83,7 +84,7 @@ Route::resource('/events', 'EventsController');
 Route::resource('/photos', 'PhotosController');
 Route::resource('/classes', 'ClassesController');
 Route::resource('/parachas', 'ParachasController');
-Route::resource('/parents', 'ParentsController');
+Route::resource('/parents', 'ParentisController');
 Route::resource('/meals', 'MealsController');
 Route::resource('/materials', 'MaterialsController');
 
