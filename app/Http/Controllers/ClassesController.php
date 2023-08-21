@@ -184,4 +184,94 @@ class ClassesController extends Controller
     {
         //
     }
+
+    public function midSchool(){
+        $program = Page::where('id', 25)->get();
+        $range = [];
+        return view('layouts.default.unit')->with([
+            'program' => $program,
+            'range' => $range,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
+//
+        ]);
+    }
+
+    public function secondarySchool(){
+        $program = Page::where('id', 24)->get();
+        $range = Classe::where('id', '>', 6)->pluck('id', 'title')->toArray();
+        return view('layouts.default.unit')->with([
+            'program' => $program,
+            'range' => $range,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
+//
+        ]);
+    }
+
+    public function primarySchool(){
+        $program = Page::where('id', 23)->get();
+        $range = Classe::where('id', '<=', 6)->pluck('id', 'title')->toArray();
+        return view('layouts.default.unit')->with([
+            'program' => $program,
+            'range' => $range,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
+//
+        ]);
+    }
+
+
+
 }

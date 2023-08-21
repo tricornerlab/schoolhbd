@@ -55,7 +55,7 @@ Route::get('/about', 'PagesController@about')->name('about');
 Route::get('/partners', 'PagesController@partners')->name('partners');
 Route::get('/suppliers', 'PagesController@suppliers')->name('suppliers');
 Route::get('/history', 'PagesController@history')->name('history');
-Route::get('/eduplan', 'PagesController@history')->name('eduplan');
+Route::get('/eduplan', 'PagesController@eduplan')->name('eduplan');
 Route::get('/extras', 'PagesController@history')->name('extras');
 Route::get('/projects', 'PagesController@history')->name('projects');
 Route::get('/calendar', 'PagesController@calendar')->name('calendar');
@@ -63,6 +63,9 @@ Route::get('/toparents', 'PagesController@toParents')->name('toparents');
 Route::get('/aboutm', 'PagesController@aboutMoodle')->name('aboutm');
 Route::get('/comitee', 'PagesController@comitee')->name('comitee');
 Route::get('/eduplan', 'PagesController@eduplan')->name('eduplan');
+Route::get('/primary', 'ClassesController@primarySchool')->name('primary');
+Route::get('/mid', 'ClassesController@midSchool')->name('mid');
+Route::get('/secondary', 'ClassesController@secondarySchool')->name('secondary');
 
 Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
 
