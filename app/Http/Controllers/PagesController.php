@@ -22,193 +22,241 @@ use App\Models\Event;
 
 class PagesController extends Controller
 {
+        public $topmenu;
+        public $sidemenu;
+        public $midmenu;
+        public $socials;
+        public $contact;
+        public $timetable;
+        public $news;
+        public $teachers;
+        public $director;
+        public $services;
+        public $paracha;
+        public $about;
+        public $photos;
+        public $activities;
+        public $classes;
+        public $events;
+        public $footer;
+
+
+
+
+    public function __construct(){
+        $this->topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $this->sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
+        $this->midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
+        $this->socials = Social::orderby('icon_order')->get()->toArray();
+        $this->contact = Contact::where('id', 1)->get()->toArray();
+        $this->timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
+        $this->news = Novita::latest()->take(6)->get();
+        $this->teachers = Teacher::orderBy('surname')->get()->toArray();
+        $this->director = Employee::where('id', 1)->get()->toArray();
+        $this->services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
+        $this->paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $this->about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
+        $this->photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
+        $this->activities = Activitie::orderBy('created_at')->take(4)->get();
+        $this->classes = Classe::all()->pluck('title', 'id')->toArray();
+        $this->events = Event::latest()->take(4)->get();
+        $this->footer = Page::findMany([10, 11, 12, 15, 9]);
+    }
+
+
     public function index()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(6)->get();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
-        $events = Event::latest()->take(2)->get();
-        $footer = Page::findMany([10, 11, 12, 15]);
-        //echo '<pre>';
-        //print_r($director);
+
+
         return view('layouts.default.main')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
-            'events' => $events,
-            'footer' => $footer,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
         ]);
     }
 
 
     public function about()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $about = Page::find(1)->select(['content_en', 'content_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $classes = Classe::all()->pluck(['id', 'title'])->toArray();
+
         //print_r($about);
         return view('layouts.default.about')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'about' => $about,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
-            'classes' => $classes,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
 
         ]);
     }
 
     public function history()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $text = Page::find(1)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        //print_r($about);
+        $text = Page::where('id',8)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
+
         return view('layouts.default.history')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
             'text' => $text,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
 
         ]);
     }
 
     public function advantages()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
         $advantages = Page::where('id', 2)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        //print_r($topmenu);
         return view('layouts.default.advantages')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
+
             'advantages' => $advantages,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
 
         ]);
     }
 
     public function program()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
         $program = Page::where('id', 3)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        //print_r($topmenu);
+
         return view('layouts.default.program')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
             'program' => $program,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
 
         ]);
     }
 
     public function partners()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-
         $text = Page::where('id', 7)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        //print_r($topmenu);
-        return view('layouts.default.partners')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'text' => $text,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
 
+        return view('layouts.default.partners')->with([
+
+            'text' => $text,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
         ]);
     }
 
     public function suppliers()
     {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $text = Page::where('id', 9)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        //print_r($topmenu);
-        return view('layouts.default.suppliers')->with([
-            'topmenu' => $topmenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'text' => $text,
-            'sidemenu' => $sidemenu,
-            'director' => $director,
-            'services' => $services,
 
+        $text = Page::where('id', 9)->select(['content_en', 'content_fr', 'title_en', 'title_fr'])->get();
+
+        return view('layouts.default.suppliers')->with([
+
+            'text' => $text,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
         ]);
     }
 
@@ -253,134 +301,114 @@ class PagesController extends Controller
     }
 
     public function calendar(){
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(5)->get()->toArray();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
+        $calendar = Page::where('id',20)->get();
+
         return view('layouts.default.calendar')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
-//            'program' => $program,
+            'calendar' => $calendar,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
+//
         ]);
     }
 
     public function toParents(){
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(6)->get();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
-        $events = Event::latest()->take(2)->get();
-        //echo '<pre>';
-        //print_r($director);
+        $text = Page::where('id',17)->get() ;
+
+
         return view('layouts.default.parents')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
-            'events' => $events,
+            'text' => $text,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
         ]);
     }
 
     public function aboutMoodle(){
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(6)->get();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
-        $events = Event::latest()->take(2)->get();
-        //echo '<pre>';
-        //print_r($director);
+        $text = Page::where('id', 18)->get();
+
         return view('layouts.default.aboutmoodle')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
-            'events' => $events,
+            'text' => $text,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+    }
+
+    public function comitee(){
+        $comitee = Page::where('id',21)->get();
+
+        return view('layouts.default.commitee')->with([
+            'comitee' => $comitee,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+
+//
         ]);
     }
 
 
 
-//    public function change(Request $request){
-//
-////        $locale = App::currentlocale();
-////        if (App::islocale('en')){ redirect()->back();
-////        } else {redirect()->back();}
-////        //session()->put('locale', $request->lang);
-//
-//
-//        App::setLocale($request->lang);
-//        session()->put('locale', $request->lang);
-//
-//        return redirect()->back();
-//
-//    }
-//
 }
