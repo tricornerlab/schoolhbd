@@ -20,4 +20,19 @@ return [
     'enrolled' => "l'étudiant a été enregistré",
     'sent' => "Le message a été envoyé",
     'enquiry' => "la demande a été envoyée",
-];
+    'submit' => "Envoyer",
+    'login' => 'Login',
+    'register' => "S'enregistrer",
+    'search' => "Rechercher",
+    'studname' => "Nom d'étudiant",
+    'studsurname' => "Prenom d'étidiant",
+    'subject' => 'sujet',
+    'email' => 'e-mail',
+    'enter' => 'Votre message',
+    'from' => 'de:',
+    'comments' => 'Commentaires'
+
+
+
+
+    ];

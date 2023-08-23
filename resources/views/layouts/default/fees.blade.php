@@ -1,25 +1,29 @@
 @extends('welcome')
-
-
-
 @section('content')
 
-    <section class="mx-auto w-[80%]  ">
+    @php $title = ucfirst($fees[0]->{'title_'.app()->getLocale()}); $link = url('fees') ;   @endphp
+    <x-header :title="$title" :link="$link" />
+
+{{--    <section class="mx-auto w-[80%]  ">--}}
 
 
-        <section class="mx-auto flex inline-flex w-full  mt-10  ">
+{{--        <section class="mx-auto flex inline-flex w-full  mt-10  ">--}}
 
-            <div class="w-full   text-[#2f506c]   px-3 mr-6 pb-0 pt-[12px] pl-0 bg-gray-50">
-                <a href="{{url('fees')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">
-                   {{$fees[0]->{'title_'.app()->getLocale()} }}
-                </a>
-                <section class="text-gray-700 font3 m-6">{!!  $fees[0]->{'content_'.app()->getLocale()} !!} : </section>
+{{--            <div class="w-full   text-[#2f506c]   px-3 mr-6 pb-0 pt-[12px] pl-0 bg-gray-50">--}}
+{{--                title--}}
+{{--                <a href="{{}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">--}}
+{{--                   {{  }}--}}
+{{--                </a>--}}
+{{--                content--}}
+                <section class="text-gray-700 font3 m-6">
+                    {!!  $fees[0]->{'content_'.app()->getLocale()} !!}
+                </section>
 
 
 
 
 
-                    <form class="ml-6 flex flex-col items-center " action="{{route('fees.store')}}" method="POST" enctype="multipart/form-data">
+                    <form class="ml-[20%] flex flex-col  " action="{{route('fees.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
 
@@ -36,16 +40,17 @@
                         @enderror
                         {{--   FORM         --}}
 
-                        <x-contact></x-contact>
-                        <x-green-button class="align-content-lg-end" type="submit">submit
-                                </x-green-button>
+                        <x-contact class="items-center"></x-contact>
+                        <x-submit class="" >
+                                </x-submit>
                     </form>
-            </div>
+    </section>
+    </div>
 
 
-        <x-rightmenu :sidemenu="$sidemenu" :director="$director"  />
+            <x-rightmenu :sidemenu="$sidemenu" :director="$director" />
 
-        </section>
+    <x-endtag/>
 
 @endsection
 

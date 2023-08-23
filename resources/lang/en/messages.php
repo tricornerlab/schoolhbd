@@ -20,4 +20,15 @@ return [
     'enrolled' => "The student has been registered",
     'sent' => "Email sent",
     'enquiry' => "enquiry sent",
+    'submit' => 'submit',
+    'login' => 'Log-in',
+    'register' => "Register",
+    'search' => "Search",
+    'studname' => "Student's name",
+    'studsurname' => "Student's surname",
+    'subject' => 'subject',
+    'email' => 'email',
+    'enter' => 'enter your message',
+    'from' => 'from:',
+    'comments' => 'Comments:'
 ];

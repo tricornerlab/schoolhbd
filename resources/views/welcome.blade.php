@@ -5,14 +5,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+{{--        <script src="https://cdn.tailwindcss.com"></script>--}}
+        <link rel="stylesheet" href="{{ env('APP_URL').'/css/app.css' }}">
+
         <script src="https://cdn.tailwindcss.com"></script>
-        <script src="https://kit.fontawesome.com/0ce84235fb.js" crossorigin="anonymous"></script>
-
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+        <script src="https://kit.fontawesome.com/0ce84235fb.js" crossorigin="anonymous"></script>
 
         <title>Ecole Ohalei Mena'hem</title>
 
@@ -36,11 +36,12 @@
             li{list-style-type: none}
             .sopra0{position: relative; left: 30px; bottom: 120px;}
             .parent{position: static; display: inline-block}
-
+                .frame{ border: 10px solid rgb(242, 240, 240);
+                box-shadow: 0 0 3px grey}
 
         </style>
     </head>
-
+<body>
     <main class="antialiased  ">
 
 {{--    AD MENU--}}
@@ -60,18 +61,18 @@
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-xs text-white  ">
 
-                            Dashboard</a>
+                            {{ __('sections.dashboard') }}</a>
                     @else
                         <div class="flex inline-flex">
                             <a href="{{ route('login') }}" class="text-xs text-white flex inline-flex "><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
                                     <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
                                 </svg>
-                                <div class=" ml-1">Log in</div>
+                                <div class=" ml-1">{{ __('messages.login') }}</div>
                             </a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-xs  text-white ">Register</a>
+                            <a href="{{ route('register') }}" class="ml-4 text-xs  text-white ">{{ __('messages.register') }}</a>
                         @endif
                         </div>
 
@@ -100,7 +101,7 @@
                     @csrf
                     @method('POST')
                     <input type="search" class="  h-[26px] w-26 ml-2  text-grey-100 flex" content="search..."  >
-                    <input type="submit" value="search" class="bg-green-600 h-[26px] rounded text-xs  ml-[3px] w-16">
+                    <input type="submit" value="{{ __('messages.search') }}" class="bg-green-600 h-[26px] rounded text-xs  ml-[3px] w-18 px-2">
                 </form>
                 {{-- LANGUAGE CHANGE               --}}
 
@@ -188,7 +189,7 @@
     </nav>
 
 {{--        BLADE CONTENT--}}
-    <main class="m-auto p-0 items-center w-full  flex flex-row">
+<main class="mx-auto p-0 items-center w-full  flex flex-row">
             @yield('content')
 
 
@@ -227,9 +228,14 @@
 {{--                            NEWS                --}}
                     @php $label =  __('sections.announcements'); $url=route('novitas.index') @endphp
                     <x-section :label="$label" :url="$url" />
+                        <div class="flex inline-flex">
                         @foreach($news as $new)
-                             <a href="{{ route('novitas.show', $new->id) }}">{{ $new->{'title_'.$locale} }}</a>
+
+                             <a href="{{ route('novitas.show', $new->id) }}" class="w-[200px] h-[200px] rounded bg-yellow-100 shadow p-2 m-auto  ">
+                                 <div class=" text-center border h-full py-[10%]">{{ $new->{'title_'.$locale} }}</div>
+                             </a>
                         @endforeach
+                        </div>
                     </div>
 
 
@@ -242,7 +248,9 @@
 
                             <a href="{{ route('events.show', $event->id) }}" class="px-4">
                                 <p class="text-center">{{ $event->{'title_'.$locale} }}</p>
-                                <img src="{{ env('APP_URL').$event->img }}" class="h-[200px]">
+                                @if( env('APP_URL').$event->img )
+                                    <img src="{{ env('APP_URL').$event->img }}" class="h-[200px] mx-auto mt-3 frame items-center">
+                                @endif
                             </a>
 
                     @endforeach
@@ -255,7 +263,7 @@
                         <x-section :label="$label" :url="$url" class=""/>
                         @foreach($photos as $img)
                             <a href="{{route('photos.show',$img->id )}}">
-                                <img src="{{env('APP_URL').$img->link}}" class="h-[100px]">
+                                <img src="{{env('APP_URL').$img->link}}" class="h-[100px] frame">
                             </a>
                         @endforeach
                     </div>
@@ -288,9 +296,13 @@
                     <x-section :label="$label" :url="$url" />
                     <div class="flex inline-flex">
                         @foreach($activities as $act)
-                            <a class="w-[200px] pb-5 text-center items-center mx-4" href="{{ route('activities.show', $act->id) }}">
+                            <a class="w-[200px] pb-5 text-center items-center mx-4 " href="{{ route('activities.show', $act->id) }}">
                                 {{ $act->title_en }}
-                                <img src="{{ env('APP_URL').$act->img }}" class="h-[200px] p-1 m-auto">
+                                <div class="my-3">
+                                @if( env('APP_URL').$act->img )
+                                    <img src="{{ env('APP_URL').$act->img }}" class="h-[200px]  m-auto frame items-center ">
+                                @endif
+                                </div>
                                 <p class="font3">{{ $act->content_en }}</p>
                             </a>
                         @endforeach
@@ -301,10 +313,10 @@
                     @php $label = __('sections.enquiries'); $url=''; @endphp
                     <x-section :label="$label" :url="$url" />
                     <div class="mt-6 flex flex-col">
-                        <a href="{{ route('messages.create') }}">{{ __('sections.reserve') }}</a>
-                        <a href="{{ route('messages.create') }}">{{ __('sections.information') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.reserve') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.information') }}</a>
                         <a href="{{ route('candidates.create') }}">{{ __('sections.enroll') }}</a>
-                        <a href="">{{ __('sections.booklet') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.booklet') }}</a>
                     </div>
                     </div>
 
@@ -314,7 +326,7 @@
                     <x-section :label="$label" :url="$url"   />
                         <div CLASS="flex flex-col flex-wrap h-[120px] mt-6">
                         <a href="{{ url('aboutm') }}">{{ __('sections.esupport') }}</a>
-                        <a href="{{ route('events.index') }}">{{ __('sections.extractivities') }}</a>
+                        <a href="{{ route('activities.index') }}">{{ __('sections.extractivities') }}</a>
                         <a href="{{ route('meals.index') }}">{{ __('sections.meals') }}</a>
                         <a href="{{ url('program') }} ">{{ __('sections.infoclass') }}</a>
                         <a href="{{ url('program') }}">{{ __('sections.program') }}</a>
@@ -322,9 +334,9 @@
                     </div>
                     </div>
 
-                </main>
-            </div>
-        </div>
+
+    </div>
+    </div>
 
 
 
@@ -349,7 +361,7 @@
             <p>Navigation</p>
             <ul class="font5 text-[#6c9abf]  flex flex-col mt-3">
                 @foreach($footer as $foot)
-                    <a href="{{ env('APP_URL').$foot->link }}" class="">
+                    <a href="{{ env('APP_URL').'/'.$foot->link }}" class="">
                         <li class="py-1 pl-1 flex inline-flex items-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
@@ -358,12 +370,18 @@
                     </a>
 
                 @endforeach
-                    <li class="py-1 pl-1 flex inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
+                    <li class="py-1 pl-1 flex inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                    </svg> Jobs</li>
-                <li class="py-1 pl-1 flex inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
+                        </svg>
+                        <a href=" {{ route('jobs.index') }}">Jobs</a>
+                    </li>
+                <li class="py-1 pl-1 flex inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                    </svg> Site map</li>
+                        </svg>
+                        <a href="#">Site map</a>
+                </li>
 
             </ul>
         </div>
@@ -407,7 +425,7 @@
                     <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
 
-                <a href="https://laravel.bigcartel.com" class="ml-1 ">
+                <a href="#" class="ml-1 ">
                     Shop
                 </a>
 
@@ -415,10 +433,10 @@
                     <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
 
-                <a href="https://github.com/sponsors/taylorotwell" class="ml-1 ">
+                <a href="https://www.habadgeneve.ch/" class="ml-1 ">
                     Sponsor
                 </a>
-                <a href="https://github.com/sponsors/taylorotwell" class="ml-1 ">
+                <a href="https://www.habadgeneve.ch/" class="ml-1 ">
                     OM Foundation
                 </a>
             </div>
@@ -435,6 +453,8 @@
 </footer>
 
 </body>
+
+    <script src="{{ env('APP_URL').'/js/app.js' }}"></script>
 
     <script type="text/javascript">
         function click(){

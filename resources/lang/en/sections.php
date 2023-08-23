@@ -14,8 +14,10 @@ return [
     */
 
     'calendar' => 'Calendar',
+    'class' => 'Class',
     'paracha' => "Week's Torah portion" ,
     'services' => 'Services proposed',
+    'projects' => 'Projects',
     'events' => 'Events',
     'photos' => 'Photo Gallery',
     'about' => 'About school',
@@ -46,6 +48,19 @@ return [
     'bank'  => 'Bank account',
     'banner1' => 'COME TO OPEN DAYS',
     'banner2' => 'Discover our online resources on Moodle',
+    'suppliers' => 'Suppliers',
+    'soon' => 'This section will be added soon.',
+    'parentmessage' =>'Some usefull services',
+    'dashboard' => 'Dashboard',
+    'comittee' => 'Committee',
+    'supplies' => 'School supplies',
+    'graduation' => 'For graduates',
+    'state' => 'State regulation',
+    'reviews' => 'Reviews',
+    'equipment' => 'Classes equipment',
+    'tostudents' => 'For students',
+    'jobs' => 'Job openings'
     'school'=> 'School',
+
 
 ];

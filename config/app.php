@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'env' => env('APP_ENV', 'production'),
+    'env' => env('APP_ENV', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,10 @@ return [
     |
     */
 
-    'debug' =>  true,
+
+    'debug' => true,
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://ecoleom.ch'),
+
+    'url' => env('APP_URL', 'https://tricorner.eu'),
+
 
     'asset_url' => env('ASSET_URL', null),
 

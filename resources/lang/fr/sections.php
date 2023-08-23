@@ -13,9 +13,11 @@ return [
     |
     */
 
-    'calendar' => 'Calendier',
+    'calendar' => 'Calendrier',
+    'class' => 'Classe',
     'paracha' => "Paracha de la semaine" ,
     'services' => 'Services proposés',
+    'projects' => 'Projets',
     'events' => 'Evenements',
     'photos' => 'Gallerie de photos',
     'about' => "A propos de l'école",
@@ -44,9 +46,22 @@ return [
     'question' => 'Questionnaire',
     'contact' => 'Nous contacter',
     'bank'  => 'Banque',
-    'banner1' => 'Venez pour les journées de postes ouvertes',
+    'banner1' => 'Venez pour les journées de portes ouvertes',
     'banner2' => 'Decouvrez les resources en ligne Moodle',
+    'suppliers' => 'Fournisseurs',
+    'soon' => 'Cet element va etre rajouté prochenement.',
+    'parentmessage' =>'Quelques services utiles:',
+    'dashboard' => 'Panel administratif',
+    'comittee' => 'Comité',
+    'supplies' => 'Fournitures scolaires',
+    'graduation' => 'Maturité',
+    'state' => "Reglamentation d'état",
+    'reviews' => 'Feedback',
+    'equipment' => 'Equipement de classes',
+    'tostudents' => "Pour les étudiants",
+    'jobs' => 'Emplois'
     'school'=> 'Ecole',
+
 
 
 ];
