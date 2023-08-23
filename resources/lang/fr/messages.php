@@ -28,7 +28,9 @@ return [
     'studsurname' => "Prenom d'étidiant",
     'subject' => 'sujet',
     'email' => 'e-mail',
-    'enter' => 'Votre message'
+    'enter' => 'Votre message',
+    'from' => 'de:',
+    'comments' => 'Commentaires'
 
 
 

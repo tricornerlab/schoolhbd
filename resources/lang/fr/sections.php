@@ -17,6 +17,7 @@ return [
     'class' => 'Classe',
     'paracha' => "Paracha de la semaine" ,
     'services' => 'Services proposés',
+    'projects' => 'Projets',
     'events' => 'Evenements',
     'photos' => 'Gallerie de photos',
     'about' => "A propos de l'école",
@@ -52,7 +53,14 @@ return [
     'parentmessage' =>'Quelques services utiles:',
     'dashboard' => 'Panel administratif',
     'comittee' => 'Comité',
-    'supplies' => 'Fournitures scolaires'
+    'supplies' => 'Fournitures scolaires',
+    'graduation' => 'Maturité',
+    'state' => "Reglamentation d'état",
+    'reviews' => 'Feedback',
+    'equipment' => 'Equipement de classes',
+    'tostudents' => "Pour les étudiants",
+    'jobs' => 'Emplois'
+
 
 
 ];

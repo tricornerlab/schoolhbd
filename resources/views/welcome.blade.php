@@ -310,10 +310,10 @@
                     @php $label = __('sections.enquiries'); $url=''; @endphp
                     <x-section :label="$label" :url="$url" />
                     <div class="mt-6 flex flex-col">
-                        <a href="{{ route('messages.create') }}">{{ __('sections.reserve') }}</a>
-                        <a href="{{ route('messages.create') }}">{{ __('sections.information') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.reserve') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.information') }}</a>
                         <a href="{{ route('candidates.create') }}">{{ __('sections.enroll') }}</a>
-                        <a href="">{{ __('sections.booklet') }}</a>
+                        <a href="{{ route('emails.create') }}">{{ __('sections.booklet') }}</a>
                     </div>
                     </div>
 
@@ -323,7 +323,7 @@
                     <x-section :label="$label" :url="$url"   />
                         <div CLASS="flex flex-col flex-wrap h-[120px] mt-6">
                         <a href="{{ url('aboutm') }}">{{ __('sections.esupport') }}</a>
-                        <a href="{{ route('events.index') }}">{{ __('sections.extractivities') }}</a>
+                        <a href="{{ route('activities.index') }}">{{ __('sections.extractivities') }}</a>
                         <a href="{{ route('meals.index') }}">{{ __('sections.meals') }}</a>
                         <a href="{{ url('program') }} ">{{ __('sections.infoclass') }}</a>
                         <a href="{{ url('program') }}">{{ __('sections.program') }}</a>
@@ -367,12 +367,18 @@
                     </a>
 
                 @endforeach
-                    <li class="py-1 pl-1 flex inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
+                    <li class="py-1 pl-1 flex inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                    </svg> Jobs</li>
-                <li class="py-1 pl-1 flex inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
+                        </svg>
+                        <a href=" {{ route('jobs.index') }}">Jobs</a>
+                    </li>
+                <li class="py-1 pl-1 flex inline-flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-short mr-1" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
-                    </svg> Site map</li>
+                        </svg>
+                        <a href="#">Site map</a>
+                </li>
 
             </ul>
         </div>
@@ -416,7 +422,7 @@
                     <path d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
                 </svg>
 
-                <a href="https://laravel.bigcartel.com" class="ml-1 ">
+                <a href="#" class="ml-1 ">
                     Shop
                 </a>
 
@@ -424,10 +430,10 @@
                     <path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                 </svg>
 
-                <a href="https://github.com/sponsors/taylorotwell" class="ml-1 ">
+                <a href="https://www.habadgeneve.ch/" class="ml-1 ">
                     Sponsor
                 </a>
-                <a href="https://github.com/sponsors/taylorotwell" class="ml-1 ">
+                <a href="https://www.habadgeneve.ch/" class="ml-1 ">
                     OM Foundation
                 </a>
             </div>

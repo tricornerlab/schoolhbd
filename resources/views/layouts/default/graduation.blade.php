@@ -2,7 +2,7 @@
 
 @section('content')
 
-    @php $title = $text[0]->{'title_'.app()->getLocale()}; $link = url('toparents') ;   @endphp
+    @php $title = __('sections.graduation'); $link = url('alumni') ;   @endphp
     <x-header :title="$title" :link="$link" />
     <section class="mx-auto w-[70%] mt-8 ">
 
@@ -19,7 +19,7 @@
 
                     <div CLASS="flex flex-col flex-wrap h-[120px] mt-6 ml-4">
                         <a href="{{ url('aboutm') }}">- {{ __('sections.esupport') }}</a>
-                        <a href="{{ route('activities.index') }}">- {{ __('sections.extractivities') }}</a>
+                        <a href="{{ route('events.index') }}">- {{ __('sections.extractivities') }}</a>
                         <a href="{{ route('meals.index') }}">- {{ __('sections.meals') }}</a>
                         <a href="{{ url('program') }} ">- {{ __('sections.infoclass') }}</a>
                         <a href="{{ url('program') }}">- {{ __('sections.program') }}</a>

@@ -151,7 +151,11 @@ class ActivitiesController extends Controller
      */
     public function show(Activitie $activitie, $request)
     {
-        $item = Activitie::find($request)->get();
+        $act = Activitie::where('id', $request);
+        $views = $act->pluck('views')[0]+1;
+        $act->update(['views' => $views]);
+
+        $item = $act->get();
         return view('layouts.default.activitie')->with([
             'item' => $item,
 
@@ -209,5 +213,12 @@ class ActivitiesController extends Controller
     public function destroy(Activitie $activitie)
     {
         //
+    }
+
+    public function like(Request $request){
+        $item = Activitie::where('id', $request->id);
+        $likes = $item->pluck('likes')[0]+1;
+        $item->update(['likes' => $likes]);
+        return redirect()->back();
     }
 }

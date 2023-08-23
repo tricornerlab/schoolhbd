@@ -11,6 +11,7 @@ use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
+use DB;
 use Illuminate\Http\Request;
 use App\Models\Page;
 use App;
@@ -434,6 +435,164 @@ class PagesController extends Controller
             'footer' => $this->footer,
         ]);
     }
+
+    public function alumni(){
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.alumni')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+
+    }
+
+    public function graduation(){
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.graduation')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+
+    }
+
+    public function finance(){
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.finance')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+
+    }
+
+    public function state(){
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.state')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+
+    }
+
+
+    public function toStudents(){
+        $text = Page::where('id', 12)->get();
+
+        return view('layouts.default.students')->with([
+            'text' => $text,
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+    }
+
+    public function equipment(){
+        $range = DB::table('equipment')->orderBy('created_at', 'desc')->paginate(2);
+
+        return view('layouts.default.equipment')->with([
+            'range' => $range,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
+        ]);
+    }
+
+
 
 
 

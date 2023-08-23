@@ -12,14 +12,14 @@ use App\Models\Novita;
 use App\Models\Page;
 use App\Models\Paracha;
 use App\Models\Photo;
+use App\Models\Review;
 use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class NovitasController extends Controller
+class ReviewsController extends Controller
 {
 
     public $topmenu;
@@ -65,20 +65,20 @@ class NovitasController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $news = DB::table('novitas')->paginate(2);
-
-        return view('layouts.default.news')->with([
-            'news' => $news,
+        $range = \DB::table('reviews')->orderBy('created_at', 'desc')->paginate(8);
+        return view('layouts.default.reviews')->with([
+            'range' => $range,
 
             'topmenu' => $this->topmenu,
             'sidemenu' => $this->sidemenu,
             'socials' => $this->socials,
             'contact' => $this->contact,
             'midmenu' => $this->midmenu,
+            'news' => $this->news,
             'teachers' => $this->teachers,
             'timetable' => $this->timetable,
             'director' => $this->director,
@@ -111,54 +111,29 @@ class NovitasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Review::create($request->all());
+        return redirect()->back();
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param  \App\Models\Review  $review
+     * @return \Illuminate\Http\Response
      */
-    public function show(Novita $novita)
+    public function show(Review $review)
     {
-        $news = Novita::where('id', $novita->id);
-        $views = $news->pluck('views')[0]+1;
-        $news->update(['views' => $views]);
-        $item = $news->get();
-
-
-
-        return view('layouts.default.new')->with([
-            'item' => $item,
-            'news' => $this->news,
-            'topmenu' => $this->topmenu,
-            'sidemenu' => $this->sidemenu,
-            'socials' => $this->socials,
-            'contact' => $this->contact,
-            'midmenu' => $this->midmenu,
-            'teachers' => $this->teachers,
-            'timetable' => $this->timetable,
-            'director' => $this->director,
-            'services' => $this->services,
-            'paracha' => $this->paracha,
-            'about' => $this->about,
-            'photos' => $this->photos,
-            'activities' => $this->activities,
-            'classes' => $this->classes,
-            'events' => $this->events,
-            'footer' => $this->footer,
-
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function edit(Novita $novita)
+    public function edit(Review $review)
     {
         //
     }
@@ -167,10 +142,10 @@ class NovitasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Novita $novita)
+    public function update(Request $request, Review $review)
     {
         //
     }
@@ -178,19 +153,11 @@ class NovitasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Novita $novita)
+    public function destroy(Review $review)
     {
         //
-    }
-
-    public function like(Request $request){
-        //dd($request['id']);
-        $item = Novita::where('id', $request->id);
-        $likes = $item->pluck('likes')[0]+1;
-        $item->update(['likes' => $likes]);
-        return redirect()->back();
     }
 }

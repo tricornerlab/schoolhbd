@@ -12,14 +12,15 @@ use App\Models\Novita;
 use App\Models\Page;
 use App\Models\Paracha;
 use App\Models\Photo;
+use App\Models\Project;
 use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
+use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class NovitasController extends Controller
+class ProjectsController extends Controller
 {
 
     public $topmenu;
@@ -39,7 +40,6 @@ class NovitasController extends Controller
     public $classes;
     public $events;
     public $footer;
-
 
 
 
@@ -65,20 +65,22 @@ class NovitasController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $news = DB::table('novitas')->paginate(2);
-
-        return view('layouts.default.news')->with([
-            'news' => $news,
+        $projects = Page::where('id', 23)->get();
+        $range = DB::table('projects')->paginate(2);
+        return view('layouts.default.projects')->with([
+            'projects' => $projects,
+            'range' => $range,
 
             'topmenu' => $this->topmenu,
             'sidemenu' => $this->sidemenu,
             'socials' => $this->socials,
             'contact' => $this->contact,
             'midmenu' => $this->midmenu,
+            'news' => $this->news,
             'teachers' => $this->teachers,
             'timetable' => $this->timetable,
             'director' => $this->director,
@@ -90,7 +92,8 @@ class NovitasController extends Controller
             'classes' => $this->classes,
             'events' => $this->events,
             'footer' => $this->footer,
-        ]);
+             ]);
+
     }
 
     /**
@@ -117,48 +120,21 @@ class NovitasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param  \App\Models\Project  $project
+     * @return \Illuminate\Http\Response
      */
-    public function show(Novita $novita)
+    public function show(Project $project)
     {
-        $news = Novita::where('id', $novita->id);
-        $views = $news->pluck('views')[0]+1;
-        $news->update(['views' => $views]);
-        $item = $news->get();
-
-
-
-        return view('layouts.default.new')->with([
-            'item' => $item,
-            'news' => $this->news,
-            'topmenu' => $this->topmenu,
-            'sidemenu' => $this->sidemenu,
-            'socials' => $this->socials,
-            'contact' => $this->contact,
-            'midmenu' => $this->midmenu,
-            'teachers' => $this->teachers,
-            'timetable' => $this->timetable,
-            'director' => $this->director,
-            'services' => $this->services,
-            'paracha' => $this->paracha,
-            'about' => $this->about,
-            'photos' => $this->photos,
-            'activities' => $this->activities,
-            'classes' => $this->classes,
-            'events' => $this->events,
-            'footer' => $this->footer,
-
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Novita $novita)
+    public function edit(Project $project)
     {
         //
     }
@@ -167,10 +143,10 @@ class NovitasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Novita $novita)
+    public function update(Request $request, Project $project)
     {
         //
     }
@@ -178,19 +154,11 @@ class NovitasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Novita $novita)
+    public function destroy(Project $project)
     {
         //
-    }
-
-    public function like(Request $request){
-        //dd($request['id']);
-        $item = Novita::where('id', $request->id);
-        $likes = $item->pluck('likes')[0]+1;
-        $item->update(['likes' => $likes]);
-        return redirect()->back();
     }
 }

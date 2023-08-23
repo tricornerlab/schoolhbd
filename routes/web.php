@@ -57,19 +57,25 @@ Route::get('/suppliers', 'PagesController@suppliers')->name('suppliers');
 Route::get('/history', 'PagesController@history')->name('history');
 Route::get('/eduplan', 'PagesController@eduplan')->name('eduplan');
 Route::get('/extras', 'PagesController@history')->name('extras');
-Route::get('/projects', 'PagesController@history')->name('projects');
 Route::get('/calendar', 'PagesController@calendar')->name('calendar');
 Route::get('/toparents', 'PagesController@toParents')->name('toparents');
+Route::get('/tostudents', 'PagesController@toStudents')->name('tostudents');
 Route::get('/aboutm', 'PagesController@aboutMoodle')->name('aboutm');
 Route::get('/comitee', 'PagesController@comitee')->name('comitee');
 Route::get('/eduplan', 'PagesController@eduplan')->name('eduplan');
 Route::get('/primary', 'ClassesController@primarySchool')->name('primary');
 Route::get('/mid', 'ClassesController@midSchool')->name('mid');
 Route::get('/secondary', 'ClassesController@secondarySchool')->name('secondary');
+Route::get('/state', 'PagesController@state')->name('state');
+Route::get('/finance', 'PagesController@finance')->name('finance');
+Route::get('/alumni', 'PagesController@alumni')->name('alumni');
+Route::get('/graduation', 'PagesController@graduation')->name('graduation');
+Route::get('/equipment', 'PagesController@equipment')->name('equipment');
 
 Route::post('/mlogin', 'PagesController@moodleLogin')->name('mlogin');
-
-
+Route::get('/nlike', 'NovitasController@like')->name('nlike');
+Route::get('/elike', 'EventsController@like')->name('elike');
+Route::get('/alike', 'ActivitiesController@like')->name('alike');
 
 
 //Route::get('/moodle', 'PagesController@moodle')->name('moodle');
@@ -91,7 +97,9 @@ Route::resource('/parachas', 'ParachasController');
 Route::resource('/parents', 'ParentisController');
 Route::resource('/meals', 'MealsController');
 Route::resource('/materials', 'MaterialsController');
-
+Route::resource('/projects', 'ProjectsController');
+Route::resource('/reviews', 'ReviewsController');
+Route::resource('/jobs', 'JobsController');
 
 Route::fallback(function () {return '404';}
 );

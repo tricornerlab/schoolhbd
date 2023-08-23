@@ -17,6 +17,7 @@ return [
     'class' => 'Class',
     'paracha' => "Week's Torah portion" ,
     'services' => 'Services proposed',
+    'projects' => 'Projects',
     'events' => 'Events',
     'photos' => 'Photo Gallery',
     'about' => 'About school',
@@ -52,6 +53,14 @@ return [
     'parentmessage' =>'Some usefull services',
     'dashboard' => 'Dashboard',
     'comittee' => 'Committee',
-    'supplies' => 'School supplies'
+    'supplies' => 'School supplies',
+    'graduation' => 'For graduates',
+    'state' => 'State regulation',
+    'reviews' => 'Reviews',
+    'equipment' => 'Classes equipment',
+    'tostudents' => 'For students',
+    'jobs' => 'Job openings'
+
+
 
 ];

@@ -123,46 +123,33 @@ class EventsController extends Controller
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show(Event $event)
-    {
-        $topmenu = Page::where('topmenu', 1)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $sidemenu = Page::where('topmenu', 0)->select(['title_en', 'title_fr', 'link'])->orderby('page_order')->get();
-        $midmenu = Midmenu::orderby('item_order')->select(['title_en','title_fr', 'link_en', 'link_fr'])->get();
-        $socials = Social::orderby('icon_order')->get()->toArray();
-        $contact = Contact::where('id', 1)->get()->toArray();
-        $timetable = Timetable::orderby('timetable')->take(4)->pluck('timetable', 'fromto')->toArray();
-        $news = Novita::latest()->take(6)->get();
-        $teachers = Teacher::orderBy('surname')->get()->toArray();
-        $director = Employee::where('id', 1)->get()->toArray();
-        $services = Service::orderBy('created_at')->take(10)->select(['title_en', 'title_fr', 'id'])->get();
-        $paracha = Paracha::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $about = Page::find(1)->select(['title_en', 'title_fr', 'content_fr', 'content_en'])->get();
-        $photos = Photo::orderBy('created_at')->take(15)->select('id', 'link')->get();
-        $activities = Activitie::orderBy('created_at')->take(4)->get();
-        $classes = Classe::all()->pluck('title', 'id')->toArray();
-        $event = Event::find($event->id)->get();
-        $events = Event::latest()->take(4)->get();
-        $footer = Page::findMany([10, 11, 12, 15]);
-        //echo '<pre>';
-        //print_r($director);
+
+    {   $evento = Event::where('id', $event->id);
+        $views = $evento->pluck('views')[0]+1;
+        $evento->update(['views' => $views]);
+        $range = $evento->get()->toArray();
+
         return view('layouts.default.event')->with([
-            'topmenu' => $topmenu,
-            'sidemenu' => $sidemenu,
-            'socials' => $socials,
-            'contact' => $contact,
-            'midmenu' => $midmenu,
-            'news' => $news,
-            'teachers' => $teachers,
-            'timetable' => $timetable,
-            'director' => $director,
-            'services' => $services,
-            'paracha' => $paracha,
-            'about' => $about,
-            'photos' => $photos,
-            'activities' => $activities,
-            'classes' => $classes,
-            'events' => $events,
-            'footer' => $footer,
-            'event' => $event,
+
+            'range' => $range,
+
+            'topmenu' => $this->topmenu,
+            'sidemenu' => $this->sidemenu,
+            'socials' => $this->socials,
+            'contact' => $this->contact,
+            'midmenu' => $this->midmenu,
+            'news' => $this->news,
+            'teachers' => $this->teachers,
+            'timetable' => $this->timetable,
+            'director' => $this->director,
+            'services' => $this->services,
+            'paracha' => $this->paracha,
+            'about' => $this->about,
+            'photos' => $this->photos,
+            'activities' => $this->activities,
+            'classes' => $this->classes,
+            'events' => $this->events,
+            'footer' => $this->footer,
         ]);
     }
 
@@ -198,5 +185,13 @@ class EventsController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function like(Request $request){
+        //dd($request['id']);
+        $item = Event::where('id', $request->id);
+        $likes = $item->pluck('likes')[0]+1;
+        $item->update(['likes' => $likes]);
+        return redirect()->back();
     }
 }

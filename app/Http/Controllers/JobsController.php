@@ -7,6 +7,7 @@ use App\Models\Classe;
 use App\Models\Contact;
 use App\Models\Employee;
 use App\Models\Event;
+use App\Models\Job;
 use App\Models\Midmenu;
 use App\Models\Novita;
 use App\Models\Page;
@@ -16,10 +17,10 @@ use App\Models\Service;
 use App\Models\Social;
 use App\Models\Teacher;
 use App\Models\Timetable;
+use DB;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class NovitasController extends Controller
+class JobsController extends Controller
 {
 
     public $topmenu;
@@ -65,20 +66,20 @@ class NovitasController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index()
     {
-        $news = DB::table('novitas')->paginate(2);
+        $range = DB::table('jobs')->paginate(3);
 
-        return view('layouts.default.news')->with([
-            'news' => $news,
-
+        return view('layouts.default.jobs')->with([
+            'range' => '$range',
             'topmenu' => $this->topmenu,
             'sidemenu' => $this->sidemenu,
             'socials' => $this->socials,
             'contact' => $this->contact,
             'midmenu' => $this->midmenu,
+            'news' => $this->news,
             'teachers' => $this->teachers,
             'timetable' => $this->timetable,
             'director' => $this->director,
@@ -117,48 +118,21 @@ class NovitasController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @param  \App\Models\Job  $job
+     * @return \Illuminate\Http\Response
      */
-    public function show(Novita $novita)
+    public function show(Job $job)
     {
-        $news = Novita::where('id', $novita->id);
-        $views = $news->pluck('views')[0]+1;
-        $news->update(['views' => $views]);
-        $item = $news->get();
-
-
-
-        return view('layouts.default.new')->with([
-            'item' => $item,
-            'news' => $this->news,
-            'topmenu' => $this->topmenu,
-            'sidemenu' => $this->sidemenu,
-            'socials' => $this->socials,
-            'contact' => $this->contact,
-            'midmenu' => $this->midmenu,
-            'teachers' => $this->teachers,
-            'timetable' => $this->timetable,
-            'director' => $this->director,
-            'services' => $this->services,
-            'paracha' => $this->paracha,
-            'about' => $this->about,
-            'photos' => $this->photos,
-            'activities' => $this->activities,
-            'classes' => $this->classes,
-            'events' => $this->events,
-            'footer' => $this->footer,
-
-        ]);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function edit(Novita $novita)
+    public function edit(Job $job)
     {
         //
     }
@@ -167,10 +141,10 @@ class NovitasController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Novita $novita)
+    public function update(Request $request, Job $job)
     {
         //
     }
@@ -178,19 +152,11 @@ class NovitasController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Novita  $novita
+     * @param  \App\Models\Job  $job
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Novita $novita)
+    public function destroy(Job $job)
     {
         //
-    }
-
-    public function like(Request $request){
-        //dd($request['id']);
-        $item = Novita::where('id', $request->id);
-        $likes = $item->pluck('likes')[0]+1;
-        $item->update(['likes' => $likes]);
-        return redirect()->back();
     }
 }

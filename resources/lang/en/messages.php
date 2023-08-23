@@ -28,5 +28,7 @@ return [
     'studsurname' => "Student's surname",
     'subject' => 'subject',
     'email' => 'email',
-    'enter' => 'enter your message'
+    'enter' => 'enter your message',
+    'from' => 'from:',
+    'comments' => 'Comments:'
 ];
