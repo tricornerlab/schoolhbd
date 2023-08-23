@@ -59,7 +59,7 @@ return [
     'reviews' => 'Reviews',
     'equipment' => 'Classes equipment',
     'tostudents' => 'For students',
-    'jobs' => 'Job openings'
+    'jobs' => 'Job openings',
     'school'=> 'School',
 
 
