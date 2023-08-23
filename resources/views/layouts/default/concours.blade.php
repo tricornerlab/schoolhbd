@@ -1,18 +1,12 @@
 @extends('welcome')
 
 @section('content')
+    @php $title=$text[0]->{'title_'.app()->getLocale()}; $link=url('concours');   @endphp
+<x-header :title="$title" :link="$link" />
 
-    <section class="mx-auto w-[70%] mt-8">
-
-        <main class="flex inline-flex w-full mt-10 mr-0 pr-0">
-
-<div class="w-[70%]    text-[#2f506c]   pt-[12px] pl-0">
-    <a href="{{url('concours')}}" class="font3 text-[#2f506c] text-lg border-t-2 border-[#6091ba] pt-[11px] px-3">
-     {{  $text[0]->{'title_'.app()->getLocale()} }}
-    </a>
 
 @foreach($concours as $new)
-    <section class="m-8 bg-gray-50 p-5  mr-5">
+
         {{--   news1     --}}
         <div class="">
             <div class="flex flex-col items-center">
@@ -28,9 +22,9 @@
                     <p class=" ">{{ substr($new->created_at, 0, 10)}}</p>
                     <i class="fas fa-comments fa-lg  p-3 pr-1 pl-4 text-[text-gray-500]"></i>
 
-
-
+                </div>
             </div>
+        </div>
 
 
 {{--                <a class=" w-[100px] text-blue-400 inline-flex items-center" href="">--}}
@@ -44,19 +38,21 @@
 
 
 
-    </section>
+
 
 @endforeach
-    <p class="w-[300px] items-center">{{$concours->links()}}</p>
+    <p class="w-[300px] items-center">
+        {{$concours->links()}}
+    </p>
 
 
 </div>
 
-
+    </section>
 
         <x-rightmenu :sidemenu="$sidemenu" :director="$director"  />
 
-    </main>
+    <x-endtag/>
 
 
 @endsection

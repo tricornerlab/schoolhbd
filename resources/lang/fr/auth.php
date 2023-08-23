@@ -16,5 +16,7 @@ return [
     'failed' => 'Les donnees ne correspondent pas',
     'password' => "Le mot de passe n'est pas correct",
     'throttle' => "trop de tentatives d'autorisation. essayez dans :seconds secondes.",
+    'name' => 'prénom',
+    'surname' => 'nom de famille',
 
 ];
