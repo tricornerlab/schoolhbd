@@ -59,7 +59,7 @@ return [
     'reviews' => 'Feedback',
     'equipment' => 'Equipement de classes',
     'tostudents' => "Pour les étudiants",
-    'jobs' => 'Emplois'
+    'jobs' => 'Emplois',
     'school'=> 'Ecole',
 
 
