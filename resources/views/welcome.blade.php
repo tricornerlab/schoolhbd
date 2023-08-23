@@ -5,7 +5,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-{{--        <script src="https://cdn.tailwindcss.com"></script>--}}
+
+
+        <script src="https://cdn.tailwindcss.com"></script>
         <link rel="stylesheet" href="{{ env('APP_URL').'/css/app.css' }}">
 
         <script src="https://cdn.tailwindcss.com"></script>
