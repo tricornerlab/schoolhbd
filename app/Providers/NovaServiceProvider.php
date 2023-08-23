@@ -44,6 +44,7 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
             return in_array($user->email, [
                 'leatamman@gmail.com'
             ]);
+             Auth::logout();
         });
     }
 

@@ -68,7 +68,6 @@ class PagesController extends Controller
     public function index()
     {
 
-
         return view('layouts.default.main')->with([
             'topmenu' => $this->topmenu,
             'sidemenu' => $this->sidemenu,
@@ -94,7 +93,6 @@ class PagesController extends Controller
     public function about()
     {
 
-        //print_r($about);
         return view('layouts.default.about')->with([
             'topmenu' => $this->topmenu,
             'sidemenu' => $this->sidemenu,
@@ -113,6 +111,9 @@ class PagesController extends Controller
             'classes' => $this->classes,
             'events' => $this->events,
             'footer' => $this->footer,
+
+        
+
 
         ]);
     }

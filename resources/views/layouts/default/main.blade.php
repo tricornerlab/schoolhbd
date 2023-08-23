@@ -4,7 +4,11 @@
     {{--    BANNER--}}
 
     <section class="max-w-6xl  m-auto px-auto   bg-white  position-static mt-2">
+
         <img src="{{ env('APP_URL') }}/img/slide-5.jpeg" class="w-[100%] h-auto pt-5 parent position-sticky">
+
+    
+
         <div class="position-relative sopra0 font3 text-md">
             <p class=" h-[40px] w-fit bg-[#6091ba] text-white px-3 py-1.5  uppercase mb-1">
                 {{ __('sections.banner1') }}

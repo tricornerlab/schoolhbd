@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Ecole Ohalei Menahem'),
+    'name' => env('APP_NAME', 'Ecole'),
 
     /*
     |--------------------------------------------------------------------------
@@ -39,7 +39,10 @@ return [
     |
     */
 
+
     'debug' => true,
+
+
 
     /*
     |--------------------------------------------------------------------------
@@ -52,7 +55,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost/app/schoolhbd/public'),
+
+    'url' => env('APP_URL', 'https://tricorner.eu'),
+
 
     'asset_url' => env('ASSET_URL', null),
 

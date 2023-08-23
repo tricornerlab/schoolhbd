@@ -60,7 +60,7 @@ return [
     'equipment' => 'Classes equipment',
     'tostudents' => 'For students',
     'jobs' => 'Job openings'
-
+    'school'=> 'School',
 
 
 ];
